@@ -338,7 +338,8 @@ self.__SERVER_FILES_MANIFEST={
     "turbopack": {
       "root": "/Users/ana/code/portfolio"
     },
-    "distDirRoot": ".next"
+    "distDirRoot": ".next",
+    "supportsImmutableAssets": false
   },
   "appDir": "/Users/ana/code/portfolio",
   "relativeAppDir": "",
@@ -352,6 +353,8 @@ self.__SERVER_FILES_MANIFEST={
     ".next/server/functions-config-manifest.json",
     ".next/server/middleware-manifest.json",
     ".next/server/middleware-build-manifest.js",
+    ".next/server/middleware-react-loadable-manifest.js",
+    ".next/react-loadable-manifest.json",
     ".next/server/app-paths-manifest.json",
     ".next/app-path-routes-manifest.json",
     ".next/server/server-reference-manifest.js",
