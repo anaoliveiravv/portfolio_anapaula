@@ -1,17 +1,57 @@
-{"timestamp":"00:00:00.652","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:02.394","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:02:14.375","source":"Server","level":"LOG","message":"✓ Compiled in 234ms"}
-{"timestamp":"00:03:45.430","source":"Server","level":"LOG","message":"✓ Compiled in 145ms"}
-{"timestamp":"00:04:24.220","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:13:25.808","source":"Server","level":"LOG","message":"✓ Compiled in 180ms"}
-{"timestamp":"00:13:42.111","source":"Server","level":"LOG","message":"✓ Compiled in 129ms"}
-{"timestamp":"00:13:59.072","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:15:00.143","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:15:13.529","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:15:13.618","source":"Browser","level":"ERROR","message":"Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>\n      <LoadingBoundary name=\"/\" loading={null}>\n        <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>\n          <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>\n            <RedirectBoundary>\n              <RedirectErrorBoundary router={{...}}>\n                <InnerLayoutRouter url=\"/\" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>\n                  <SegmentViewNode type=\"page\" pagePath=\"page.tsx\">\n                    <SegmentTrieNode>\n                    <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>\n                      <Home params={Promise} searchParams={Promise}>\n                        <main className=\"app-shell ...\">\n                          <Landscape>\n+                           <div className=\"landscape\" aria-hidden=\"true\">\n-                           <header className=\"home-header\">\n                          ...\n                  ...\n                ...\n    ...\n\n    at div (unknown)\n    at Landscape (app/page.tsx:20:82)\n    at Home (app/page.tsx:28:17)\n  \u001b[90m18 |\u001b[0m ...\n  \u001b[90m19 |\u001b[0m ...\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m20 |\u001b[0m ...an className=\u001b[32m\"home-file\"\u001b[0m><\u001b[33mPixelIcon\u001b[0m>▰<\u001b[35m/PixelIcon> portfolio.exe</span\u001b[0m><s...\n  \u001b[90m   |\u001b[0m                                        \u001b[31m\u001b[1m^\u001b[0m\n  \u001b[90m21 |\u001b[0m ...ia-labelledby=\u001b[32m\"home-title\"\u001b[0m>\n  \u001b[90m22 |\u001b[0m ...\n  \u001b[90m23 |\u001b[0m ...\u001b[32molder-behind-one\"\u001b[0m /><div className=\u001b[32m\"folder-behind folder-behind-two\"\u001b[0m />"}
-{"timestamp":"00:15:13.618","source":"Server","level":"ERROR","message":"[browser] \"\\u001b[31mUncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch\\n\\n  ...\\n    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>\\n      <LoadingBoundary name=\\\"/\\\" loading={null}>\\n        <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>\\n          <HTTPAccessFallbackErrorBoundary pathname=\\\"/\\\" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>\\n            <RedirectBoundary>\\n              <RedirectErrorBoundary router={{...}}>\\n                <InnerLayoutRouter url=\\\"/\\\" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>\\n                  <SegmentViewNode type=\\\"page\\\" pagePath=\\\"page.tsx\\\">\\n                    <SegmentTrieNode>\\n                    <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>\\n                      <Home params={Promise} searchParams={Promise}>\\n                        <main className=\\\"app-shell ...\\\">\\n                          <Landscape>\\n+                           <div className=\\\"landscape\\\" aria-hidden=\\\"true\\\">\\n-                           <header className=\\\"home-header\\\">\\n                          ...\\n                  ...\\n                ...\\n    ...\\n\\u001b[39m\\n\\u001b[31m    at div (unknown)\\n    at Landscape (app/page.tsx:20:82)\\n    at Home (app/page.tsx:28:17)\\u001b[39m\\n  \\u001b[90m18 |\\u001b[0m ...\\n  \\u001b[90m19 |\\u001b[0m ...\\n\\u001b[31m\\u001b[1m>\\u001b[0m \\u001b[90m20 |\\u001b[0m ...an className=\\u001b[32m\\\"home-file\\\"\\u001b[0m><\\u001b[33mPixelIcon\\u001b[0m>▰<\\u001b[35m/PixelIcon> portfolio.exe</span\\u001b[0m><s...\\n  \\u001b[90m   |\\u001b[0m                                        \\u001b[31m\\u001b[1m^\\u001b[0m\\n  \\u001b[90m21 |\\u001b[0m ...ia-labelledby=\\u001b[32m\\\"home-title\\\"\\u001b[0m>\\n  \\u001b[90m22 |\\u001b[0m ...\\n  \\u001b[90m23 |\\u001b[0m ...\\u001b[32molder-behind-one\\\"\\u001b[0m /><div className=\\u001b[32m\\\"folder-behind folder-behind-two\\\"\\u001b[0m />\""}
-{"timestamp":"00:15:20.663","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:15:57.613","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:17:34.864","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:18:14.855","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:21:11.221","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:00.744","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:03.285","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:02:19.146","source":"Server","level":"LOG","message":"✓ Compiled in 140ms"}
+{"timestamp":"00:02:33.289","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:08:03.023","source":"Server","level":"LOG","message":"✓ Compiled in 178ms"}
+{"timestamp":"00:08:24.473","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:08:53.795","source":"Server","level":"LOG","message":"✓ Compiled in 94ms"}
+{"timestamp":"00:10:26.737","source":"Server","level":"LOG","message":"✓ Compiled in 90ms"}
+{"timestamp":"00:10:55.664","source":"Server","level":"LOG","message":"✓ Compiled in 104ms"}
+{"timestamp":"00:11:07.924","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:12:18.025","source":"Server","level":"LOG","message":"✓ Compiled in 90ms"}
+{"timestamp":"00:12:49.738","source":"Server","level":"LOG","message":"✓ Compiled in 103ms"}
+{"timestamp":"00:13:44.139","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:14:01.236","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:14:42.861","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:15:06.508","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:16:15.553","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:18:32.570","source":"Server","level":"LOG","message":"✓ Compiled in 120ms"}
+{"timestamp":"00:18:41.695","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:20:47.460","source":"Server","level":"LOG","message":"✓ Compiled in 93ms"}
+{"timestamp":"00:20:53.162","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:21:12.620","source":"Server","level":"LOG","message":"✓ Compiled in 86ms"}
+{"timestamp":"00:22:33.275","source":"Server","level":"LOG","message":"✓ Compiled in 94ms"}
+{"timestamp":"00:25:18.039","source":"Server","level":"LOG","message":"✓ Compiled in 78ms"}
+{"timestamp":"00:25:24.453","source":"Server","level":"LOG","message":"✓ Compiled in 111ms"}
+{"timestamp":"00:25:32.938","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:26:28.769","source":"Server","level":"LOG","message":"✓ Compiled in 94ms"}
+{"timestamp":"00:28:56.933","source":"Server","level":"LOG","message":"✓ Compiled in 68ms"}
+{"timestamp":"00:29:06.284","source":"Server","level":"LOG","message":"✓ Compiled in 83ms"}
+{"timestamp":"00:29:12.375","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:30:11.150","source":"Server","level":"LOG","message":"✓ Compiled in 137ms"}
+{"timestamp":"00:30:54.333","source":"Server","level":"LOG","message":"✓ Compiled in 65ms"}
+{"timestamp":"00:33:01.049","source":"Server","level":"LOG","message":"✓ Compiled in 93ms"}
+{"timestamp":"00:34:04.281","source":"Server","level":"LOG","message":"✓ Compiled in 100ms"}
+{"timestamp":"00:34:39.192","source":"Server","level":"LOG","message":"✓ Compiled in 87ms"}
+{"timestamp":"00:35:07.913","source":"Server","level":"LOG","message":"✓ Compiled in 92ms"}
+{"timestamp":"00:38:24.268","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:40:35.293","source":"Server","level":"LOG","message":"✓ Compiled in 159ms"}
+{"timestamp":"00:42:17.147","source":"Server","level":"LOG","message":"✓ Compiled in 139ms"}
+{"timestamp":"00:42:22.268","source":"Server","level":"LOG","message":"✓ Compiled in 113ms"}
+{"timestamp":"00:46:14.622","source":"Server","level":"LOG","message":"✓ Compiled in 102ms"}
+{"timestamp":"00:47:05.961","source":"Server","level":"LOG","message":"✓ Compiled in 128ms"}
+{"timestamp":"00:47:44.954","source":"Server","level":"LOG","message":"✓ Compiled in 85ms"}
+{"timestamp":"01:30:46.167","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"01:34:31.232","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"01:36:04.700","source":"Server","level":"LOG","message":"✓ Compiled in 147ms"}
+{"timestamp":"01:37:02.943","source":"Server","level":"LOG","message":"✓ Compiled in 151ms"}
+{"timestamp":"01:37:40.914","source":"Server","level":"LOG","message":"✓ Compiled in 77ms"}
+{"timestamp":"01:49:42.026","source":"Server","level":"LOG","message":"✓ Compiled in 146ms"}
+{"timestamp":"01:49:50.221","source":"Server","level":"LOG","message":"✓ Compiled in 82ms"}
+{"timestamp":"01:50:02.696","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"01:51:05.490","source":"Server","level":"LOG","message":"✓ Compiled in 103ms"}
+{"timestamp":"01:51:23.125","source":"Server","level":"LOG","message":"✓ Compiled in 123ms"}
+{"timestamp":"01:54:15.302","source":"Server","level":"LOG","message":"✓ Compiled in 87ms"}
+{"timestamp":"01:54:29.745","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"01:55:18.716","source":"Server","level":"LOG","message":"✓ Compiled in 91ms"}
+{"timestamp":"01:55:44.021","source":"Server","level":"LOG","message":"✓ Compiled in 114ms"}
