@@ -1,10 +1,2 @@
-{"timestamp":"00:00:00.632","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:02.317","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:16:30.712","source":"Server","level":"LOG","message":"✓ Compiled in 150ms"}
-{"timestamp":"00:16:48.880","source":"Server","level":"LOG","message":"✓ Compiled in 110ms"}
-{"timestamp":"00:20:44.279","source":"Server","level":"LOG","message":"✓ Compiled in 48ms"}
-{"timestamp":"00:20:59.284","source":"Server","level":"LOG","message":"✓ Compiled in 51ms"}
-{"timestamp":"00:31:08.234","source":"Server","level":"WARN","message":"⚠ Blocked cross-origin request to Next.js dev resource /_next/hmr from \"127.0.0.1\".\nCross-origin access to Next.js dev resources is blocked by default for safety.\n\nTo allow this host in development, add it to \"allowedDevOrigins\" in next.config.js and restart the dev server:\n\n// next.config.js\nmodule.exports = {\n  allowedDevOrigins: ['127.0.0.1'],\n}\n\nRead more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins"}
-{"timestamp":"00:36:41.459","source":"Server","level":"LOG","message":"✓ Compiled in 170ms"}
-{"timestamp":"00:38:03.259","source":"Server","level":"LOG","message":"✓ Compiled in 176ms"}
-{"timestamp":"00:41:38.561","source":"Server","level":"LOG","message":"✓ Compiled in 151ms"}
+{"timestamp":"00:00:00.733","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:02.543","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}

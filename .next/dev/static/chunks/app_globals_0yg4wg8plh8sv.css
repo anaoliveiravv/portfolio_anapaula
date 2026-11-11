@@ -290,13 +290,14 @@ html, body {
 
 body {
   color: var(--ink);
+  cursor: url("/assets/pixel-cursor.svg") 12 5, auto;
   background: #d4d5e7;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
   font: inherit;
-  cursor: pointer;
+  cursor: url("/assets/pixel-cursor.svg") 12 5, pointer;
 }
 
 button:focus-visible {
@@ -1698,6 +1699,30 @@ button:focus-visible {
   background: none;
 }
 
+.is-inner .pixel-meadow {
+  z-index: 3;
+  object-fit: fill;
+  width: 100%;
+  height: clamp(65px, 9vw, 100px);
+  image-rendering: pixelated;
+  pointer-events: none;
+  position: absolute;
+  inset: auto 0 0;
+}
+
+.is-inner .inner-header, .is-inner .inner-content {
+  z-index: 2;
+  position: relative;
+}
+
+.is-inner .missing-note {
+  z-index: 4;
+}
+
+.is-inner .flowers {
+  display: none;
+}
+
 @media (min-width: 1001px) {
   .home-layout {
     grid-template-columns: minmax(0, 2.1fr) minmax(380px, .9fr);
@@ -1734,7 +1759,7 @@ button:focus-visible {
     color: #0000;
     text-shadow: none;
     image-rendering: pixelated;
-    background: url("/assets/home-sprites.png") 0 0 / 1195px 398px no-repeat;
+    background: url("/assets/menu-cursor-sheet.png") 0 0 / 603px 302px no-repeat;
     border: 0;
     border-radius: 0;
     padding: 0;
@@ -1742,25 +1767,26 @@ button:focus-visible {
   }
 
   .game-menu button:hover, .game-menu button.selected {
-    background-image: url("/assets/home-sprites.png");
+    filter: brightness(1.03);
+    background-image: url("/assets/menu-cursor-sheet.png");
     background-repeat: no-repeat;
-    background-size: 1195px 398px;
+    background-size: 603px 302px;
   }
 
   .game-menu button:first-child {
-    background-position: -611px -66px;
+    background-position: -68px -22px;
   }
 
   .game-menu button:nth-child(2) {
-    background-position: -611px -138px;
+    background-position: -68px -93px;
   }
 
   .game-menu button:nth-child(3) {
-    background-position: -611px -209px;
+    background-position: -68px -159px;
   }
 
   .game-menu button:nth-child(4) {
-    background-position: -611px -275px;
+    background-position: -68px -222px;
   }
 
   .menu-glyph {
