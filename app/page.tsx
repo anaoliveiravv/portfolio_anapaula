@@ -5,14 +5,6 @@ import { useState } from "react";
 type View = "inicio" | "projetos" | "sobre mim" | "experiência" | "contato";
 const views: View[] = ["inicio", "projetos", "sobre mim", "experiência", "contato"];
 
-function Flowers() {
-  return <div className="flowers" aria-hidden="true"><span>✿</span><span>✿</span><span>✿</span></div>;
-}
-
-function Landscape() {
-  return <div className="landscape" aria-hidden="true"><div className="sun" /><div className="cloud cloud-a" /><div className="cloud cloud-b" /><div className="cloud cloud-c" /><div className="hill hill-back" /><div className="hill hill-front" /><Flowers /><Flowers /></div>;
-}
-
 function PixelIcon({ children }: { children: React.ReactNode }) {
   return <span className="pixel-icon" aria-hidden="true">{children}</span>;
 }
@@ -23,7 +15,6 @@ export default function Home() {
 
   return (
     <main className={`app-shell ${view === "inicio" ? "is-home" : "is-inner"}`}>
-      <Landscape />
       {view === "inicio" ? (
         <>
           <header className="home-header"><span className="home-file"><PixelIcon>▰</PixelIcon> portfolio.exe</span><span>v1.0.0</span></header>
