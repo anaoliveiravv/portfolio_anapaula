@@ -289,11 +289,13 @@ main.is-projects .inner-content{width:90%;margin:38px auto 0;padding:0;transform
 .is-projects .projects-page>.section-heading h2{margin:0;color:#502d4b;font:normal 58px/1 Georgia,'Times New Roman',serif}
 .is-projects .project-workspace{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,.46fr) minmax(0,.54fr);align-items:start;gap:72px}
 .is-projects .project-folder-grid{display:grid;width:670px;grid-template-columns:repeat(3,170px);align-content:start;justify-content:space-between;gap:76px 0;transform:translate(-2px,71px)}
-.is-projects .project-folder-button{width:170px;gap:6px;cursor:inherit}
-.is-projects .project-folder-art{width:170px;height:131px;object-fit:contain;filter:none}
+.is-projects .project-folder-button{position:relative;isolation:isolate;width:170px;gap:6px;cursor:inherit}
+.is-projects .project-folder-paper{position:absolute;z-index:0;top:12%;left:50%;width:66%;height:auto;transform:translate(-50%,0);transition:transform .28s ease-out;pointer-events:none}
+.is-projects .project-folder-button:is(:hover,:focus-visible) .project-folder-paper{transform:translate(-50%,-85%)}
+.is-projects .project-folder-art{z-index:1;width:170px;height:131px;object-fit:contain;filter:none}
 .is-projects .project-folder-art::before,.is-projects .project-folder-art::after{content:none}
 .is-projects .project-folder-button.active .project-folder-art{transform:none}
-.is-projects .project-folder-label{width:165px;min-height:49px;padding:5px 7px;border:2px solid #321b31;border-radius:15px;background:#fff5ed;box-shadow:3px 4px #5b405a55;font-size:15px;font-weight:700;line-height:1.15;text-align:center}
+.is-projects .project-folder-label{position:relative;z-index:2;width:165px;min-height:49px;padding:5px 7px;border:2px solid #321b31;border-radius:15px;background:#fff5ed;box-shadow:3px 4px #5b405a55;font-size:15px;font-weight:700;line-height:1.15;text-align:center}
 .is-projects .project-folder-button.active .project-folder-label{background:#fff5ed}
 .is-projects .project-folder-add{width:128px;height:124px;justify-self:center;border:2px dashed #b49eb0;border-radius:20px;color:#351b35;font-size:43px;font-weight:400}
 .is-projects .project-detail-window{width:99%;height:586px;min-height:0;margin:-55px 0 0;display:flex;flex-direction:column;border:3px solid #382638;border-radius:24px;background:#fff8f3;box-shadow:0 7px 0 #79667c50;animation:project-open .24s ease-out both}

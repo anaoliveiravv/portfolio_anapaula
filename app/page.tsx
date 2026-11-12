@@ -57,7 +57,7 @@ export default function Home() {
               <div className="section-heading"><img className="projects-star" src="/assets/portfolio/decoracao/estrela-amarela.png" width={59} height={70} alt="" /><h2 id="projects-title">Projetos</h2></div>
               <div className="project-workspace">
                 <div className="project-folder-grid" aria-label="Pastas de projetos">
-                  {projects.map((item, index) => <button className={`project-folder-button${selectedProject === index ? " active" : ""}`} key={item.title} onClick={() => { setSelectedProject(index); setProjectMinimized(false); }} aria-pressed={selectedProject === index}><img className="project-folder-art" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={1082} height={832} alt="" /><span className="project-folder-label">{item.title}</span></button>)}
+                  {projects.map((item, index) => <button className={`project-folder-button${selectedProject === index ? " active" : ""}`} key={item.title} onClick={() => { setSelectedProject(index); setProjectMinimized(false); }} aria-pressed={selectedProject === index}><img className="project-folder-paper" src="/assets/portfolio/decoracao/pagina-pasta.png" width={970} height={652} alt="" /><img className="project-folder-art" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={1082} height={832} alt="" /><span className="project-folder-label">{item.title}</span></button>)}
                   <div className="project-folder-add" aria-hidden="true">+</div>
                 </div>
                 {project ? <article key={selectedProject} className={`project-detail-window${projectMinimized ? " minimized" : ""}`} aria-labelledby="project-detail-title">
