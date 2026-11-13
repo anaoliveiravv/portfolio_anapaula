@@ -276,6 +276,59 @@ main.is-projects .inner-content{width:min(1416px,89%);margin:44px auto 100px;tra
 @media(max-width:1000px){main.is-projects .inner-content{width:92%;margin:22px auto 90px}.project-workspace{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px}.project-folder-art,.project-folder-add{height:92px}.project-folder-label{font-size:12px}.project-window-content{padding:16px}.project-overview{gap:14px}.project-preview{height:145px}.project-summary h4{font-size:20px}.project-detail-columns{gap:14px}}
 @media(max-width:700px){main.is-projects .inner-header{width:auto;padding:16px 4% 0;transform:none}main.is-projects .inner-content{width:calc(100% - 28px);margin:22px auto 80px;padding-bottom:70px}.is-projects .projects-page>.section-heading{gap:12px;margin-bottom:12px}.is-projects .projects-page>.section-heading h2{font-size:39px}.project-workspace{grid-template-columns:1fr;gap:24px}.project-folder-grid{gap:12px 8px;transform:none}.project-folder-button,.project-folder-add{width:100%}.project-folder-art,.project-folder-add{height:74px}.project-folder-label{min-height:38px;padding:5px 4px;font-size:10px}.project-folder-add{font-size:34px}.project-detail-window{min-height:0;margin-top:0}.project-window-bar{min-height:48px;padding:6px 12px}.project-window-bar h3{font-size:15px}.project-window-folder{width:27px;height:19px}.project-window-content{padding:13px}.project-overview{grid-template-columns:1fr;gap:14px}.project-preview{height:150px}.project-screens{gap:7px;margin-top:8px}.project-screen-shot{height:60px}.project-summary h4{font-size:20px}.project-summary .tags{margin-top:10px}.project-detail-divider{margin:14px 0}.project-detail-columns{grid-template-columns:1fr;gap:15px}.project-action{min-width:170px}}
 
+/* About desktop theme uses the supplied scrapbook assets. */
+main.is-inner.is-about{width:100%;height:100svh;min-height:0;margin:0;border:0;border-radius:0;box-shadow:none;overflow:hidden;background:#fff3ed}
+main.is-about .inner-header{position:absolute;z-index:5;top:22px;left:0;right:0;width:100%;max-width:none;margin:0;padding:0;display:flex;justify-content:center;transform:none}
+main.is-about .inner-brand{display:none}
+main.is-about .inner-header nav{display:flex;justify-content:center;gap:clamp(24px,4vw,72px);flex-wrap:nowrap}
+main.is-about .inner-header nav button{position:relative;min-width:0;width:clamp(100px,10vw,160px);height:120px;padding:0 0 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:0;border:0;border-radius:20px;background:transparent;box-shadow:none;color:#4b1462;font-size:clamp(12px,1.4vw,22px);font-weight:700;text-align:center}
+main.is-about .inner-header nav button.active{background:transparent}
+main.is-about .inner-header nav button.active::after{content:"";position:absolute;z-index:-1;left:0;right:0;bottom:0;height:31px;border-radius:24px;background:#edc5f4}
+.about-app-icon{position:absolute;top:0;left:50%;width:clamp(70px,7.4vw,118px);height:clamp(70px,7.4vw,118px);object-fit:contain;transform:translateX(-50%)}
+main.is-about .inner-content{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;transform:none}
+.about-desktop{position:relative;width:100%;height:100%;background:#fff3ed}
+.about-window{position:absolute;left:13.2%;top:23.2%;width:73.6%;height:59.4%;overflow:visible;border:2px solid #765973;border-radius:22px;background:linear-gradient(145deg,#f9b4cf,#ffd4e2 70%,#fff0e8);box-shadow:0 10px 18px #7b526433;animation:about-window-open .3s ease-out both}
+.about-window-titlebar{height:9.6%;min-height:42px;position:relative;display:flex;align-items:center;justify-content:center;border-bottom:2px solid #7c6478;border-radius:20px 20px 0 0;background:linear-gradient(#fff,#f2f0f1);color:#35333a;font-size:clamp(15px,1.55vw,25px);font-weight:700}
+.window-close{position:absolute;left:1.4%;top:50%;width:21px;height:21px;padding:0;transform:translateY(-50%);border:3px solid #9a1e31;border-radius:50%;background:#fa3342;box-shadow:inset 0 0 0 2px #ff9b9e;cursor:pointer}
+.about-window-content{position:relative;height:90.4%;overflow:visible}
+.hello-sticker{position:absolute;left:-2%;top:5%;width:29%;height:auto;z-index:2}
+.about-copy{position:absolute;left:29%;top:25%;width:33%;color:#33313a;font-size:clamp(15px,1.65vw,25px);font-weight:700;font-style:italic;line-height:1.4}
+.about-copy p{margin:0 0 7%}
+.about-photo{position:absolute;right:9%;top:11%;width:26%;height:80%;transform:rotate(7deg)}
+.about-photo>img:first-child{width:100%;height:100%;object-fit:contain}
+.photo-tape{position:absolute;top:-3%;left:28%;width:46%;height:auto}
+.cherries{position:absolute;right:3%;top:-5%;width:10%}
+.about-star{position:absolute;left:14%;bottom:8%;width:9%}
+.about-shine{position:absolute;width:4%;height:auto}
+.shine-one{right:34%;top:12%}.shine-two{right:5%;top:57%}
+.question-sticker{position:absolute;right:-3%;bottom:-6%;width:23%;z-index:3}
+.desktop-dock{position:absolute;left:50%;bottom:2.8%;width:min(31.8vw,530px);height:auto;transform:translateX(-50%)}
+@keyframes about-window-open{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@media(max-width:700px){main.is-inner.is-about{height:auto;min-height:100svh;overflow:hidden}main.is-about .inner-header{position:relative;top:auto;display:block;padding:12px 10px}main.is-about .inner-header nav{flex-wrap:wrap;gap:4px}main.is-about .inner-header nav button{height:78px;width:auto;min-width:18%;flex:1;font-size:9px}.about-app-icon{width:52px;height:52px}.about-window{left:4%;top:180px;width:92%;height:470px}.about-window-titlebar{height:45px}.about-copy{left:7%;top:15%;width:85%;font-size:15px}.hello-sticker{left:4%;top:4%;width:38%}.about-photo{right:20%;top:48%;width:42%;height:45%}.cherries{right:3%;top:-6%;width:13%}.about-star{left:5%;bottom:7%;width:12%}.question-sticker{right:-2%;bottom:-4%;width:28%}.about-shine{width:7%}.desktop-dock{position:fixed;bottom:10px;width:min(82vw,400px)}main.is-about .inner-content{position:relative;height:670px}}
+@media(prefers-reduced-motion:reduce){.about-window{animation:none}}
+
+/* Fine alignment against the supplied Sobre mim reference. */
+main.is-about .inner-header nav{gap:clamp(34px,4.1vw,68px)}
+main.is-about .inner-header nav button{font-weight:500}
+main.is-about .inner-header nav button.active::after{left:0;right:0;bottom:0;height:31px}
+.about-window{background:linear-gradient(180deg,#f7abc8 0%,#fac0d5 52%,#fff0e9 100%);border-width:2px;border-color:#765a72;border-radius:22px;box-shadow:0 8px 17px #65476530}
+.about-window-titlebar{background:linear-gradient(180deg,#fafafa,#efeff0);border-color:#806e7b}
+.window-buttons{position:absolute;left:1.4%;top:50%;display:flex;align-items:center;gap:10px;transform:translateY(-50%)}
+.window-close{position:static;transform:none}
+.window-minimize,.window-expand{display:block;width:21px;height:21px;border-radius:50%;border:3px solid #9a7410;background:#ffd522;box-shadow:inset 0 0 0 2px #ffed83}
+.window-expand{border-color:#218d30;background:#3ed538;box-shadow:inset 0 0 0 2px #a8f492}
+.about-copy{font-family:var(--font-poppins),Poppins,Arial,sans-serif;font-size:clamp(14px,1.48vw,23px);font-weight:500;font-style:normal;line-height:1.5;letter-spacing:-.015em}
+.about-copy p{margin-bottom:8%}
+.hello-sticker{left:-2.5%;top:5%;width:30%}
+.about-photo{right:7%;top:9%;width:29%;height:84%;transform:rotate(7deg)}
+.cherries{right:2.8%;top:-5%;width:10.5%}
+.about-star{left:13.5%;bottom:7%;width:10%;height:auto;flex:none;margin:0}
+.shine-one{right:34%;top:12%;width:4.5%}.shine-two{right:4%;top:55%;width:4.5%}
+.question-sticker{right:-3.3%;bottom:-6%;width:23.5%;z-index:3}
+.question-orb{position:absolute;z-index:4;left:72%;bottom:-11%;width:6.5%;aspect-ratio:1;border:2px solid #16891d;border-radius:50%;background:radial-gradient(circle at 30% 24%,#68ee57,#24cb28 58%,#0e9a1c);box-shadow:0 2px 4px #47314655}
+.desktop-dock{bottom:2.5%;width:min(30.5vw,510px)}
+@media(max-width:700px){.about-copy{font-size:15px;font-weight:400;line-height:1.5}.about-photo{right:20%;top:48%;width:42%;height:45%}.hello-sticker{width:40%}.question-orb{left:67%;bottom:-8%;width:10%}.desktop-dock{width:min(82vw,400px)}}
+
 /* Sobre mim and Contato follow the supplied two-page composition. */
 @media(min-width:651px){
   .is-inner.is-about,.is-inner.is-contact{height:calc(100svh - 20px);min-height:0;display:flex;flex-direction:column;overflow:hidden}
@@ -506,44 +559,8 @@ main.is-projects .inner-content{width:90%;margin:38px auto 0;padding:0;transform
   .is-projects .project-action{min-width:170px;font-size:14px}
 }
 
-/* The supplied desktop assets form the Sobre mim wallpaper and window. */
-main.is-inner.is-about{width:100%;height:100svh;min-height:0;margin:0;border:0;border-radius:0;box-shadow:none;overflow:hidden;background:#fff1e8 url('/assets/sobre-mim/fundo-creme-base.png') center/cover no-repeat}
-main.is-about .inner-header{position:relative;z-index:10;width:100%;max-width:none;margin:0;padding:18px 3.5%;transform:none}
-main.is-about .inner-header nav{flex-wrap:nowrap}
-main.is-about .inner-header nav button{min-width:clamp(102px,10vw,145px);display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 9px;font-size:clamp(11px,.9vw,15px)}
-.about-nav-icon{position:relative;width:30px;height:29px;flex:none;overflow:hidden}
-.about-nav-icon img{position:absolute;top:0;left:50%;width:auto;height:35px;max-width:none;transform:translateX(-50%);image-rendering:pixelated}
-main.is-about .inner-content{position:absolute;inset:0;z-index:1;width:100%;height:100%;margin:0;padding:0;display:block;transform:none}
-.about-desktop{position:relative;width:100%;height:100%}
-.about-character{position:absolute;bottom:0;left:0;width:min(52vw,863px);height:auto;max-width:none;clip-path:polygon(22% 0,78% 0,78% 70%,100% 100%,0 100%,18% 60%);image-rendering:pixelated}
-.about-window{position:absolute;top:21%;left:41%;width:min(57vw,950px);aspect-ratio:950/497;background:url('/assets/sobre-mim/janela-sobre-mim.png') center/100% 100% no-repeat;filter:drop-shadow(5px 10px 10px #6b416033);animation:about-open .28s ease-out both}
-.about-close{position:absolute;z-index:3;top:2.8%;left:3%;width:5%;height:10%;padding:0;border:0;border-radius:50%;background:transparent}
-.about-sidebar{position:absolute;top:15%;bottom:4%;left:3%;width:24%;display:flex;flex-direction:column;gap:1%;padding:5% 1.5%;background:linear-gradient(140deg,#f5eaf8,#efdbf2)}
-.about-sidebar button{min-height:19%;display:flex;align-items:center;gap:7%;padding:3%;border:0;border-radius:20px;background:transparent;color:#521c67;font-size:clamp(10px,1.1vw,19px);font-weight:700;text-align:left;white-space:nowrap}
-.about-sidebar button[aria-selected="true"]{background:#e8bbf7}
-.about-sidebar button img{width:24%;height:auto;max-height:52px;object-fit:contain;image-rendering:pixelated}
-.about-flowers{width:42%;height:auto;margin:auto 0 0 7%;image-rendering:pixelated}
-.about-window-body{position:absolute;top:15%;right:3%;bottom:4%;left:29%;padding:5% 3.5%;background:#fff3ec;color:#49145e}
-.about-window-body h2{width:max-content;max-width:100%;margin:0 0 5%;border-bottom:4px solid #f5b0d4;font-size:clamp(18px,2.2vw,36px);line-height:1.25}
-.about-window-body p{max-width:55ch;margin:0 0 5%;font-size:clamp(12px,1.13vw,19px);font-weight:650;line-height:1.5}
-.about-dock{position:absolute;z-index:2;bottom:2%;left:50%;width:min(29vw,485px);height:auto;transform:translateX(-50%);image-rendering:pixelated}
-@keyframes about-open{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
-@media(max-width:900px){
-  main.is-inner.is-about{height:auto;min-height:100svh;overflow:visible}
-  main.is-about .inner-header{display:block;padding:12px 4%}
-  main.is-about .inner-header nav{width:100%;margin-top:10px;flex-wrap:wrap}
-  main.is-about .inner-header nav button{min-width:0;flex:1 1 28%;font-size:11px}
-  main.is-about .inner-content{position:relative;height:auto;min-height:720px}
-  .about-desktop{min-height:720px}
-  .about-character{top:0;bottom:auto;left:0;width:min(72vw,440px)}
-  .about-window{top:270px;left:3%;width:94%;min-height:440px;aspect-ratio:auto;background-size:100% 100%}
-  .about-sidebar{top:14%;right:3%;bottom:auto;left:3%;width:auto;height:70px;flex-direction:row;align-items:center;padding:5px;gap:4px}
-  .about-sidebar button{min-height:50px;flex:1;gap:4px;justify-content:center;padding:4px;font-size:11px;white-space:normal}
-  .about-sidebar button img{width:24px}
-  .about-flowers{display:none}
-  .about-window-body{top:31%;left:4%;right:4%;bottom:5%;padding:16px}
-  .about-window-body h2{font-size:clamp(18px,5vw,28px)}
-  .about-window-body p{font-size:clamp(12px,3.4vw,16px)}
-  .about-dock{bottom:8px;width:min(75vw,360px)}
-}
-@media(prefers-reduced-motion:reduce){.about-window{animation:none}}
+/* Keep the desktop star proportional despite the shared text-page rule. */
+main.is-about .about-star{width:12%;height:auto;flex:none;margin:0}
+main.is-about .inner-header nav button.active::after{left:-10%;right:-10%}
+.question-orb{left:74%;bottom:-5%}
+@media(max-width:700px){main.is-about .about-star{width:12%}.question-orb{left:67%;bottom:-8%}}

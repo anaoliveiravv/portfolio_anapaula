@@ -45,7 +45,6 @@ export default function Home() {
   const [projectMinimized, setProjectMinimized] = useState(false);
   const [linkNotice, setLinkNotice] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(true);
-  const [aboutTab, setAboutTab] = useState<"Me conheça" | "Formação" | "Interesses">("Me conheça");
   useLayoutEffect(() => { window.scrollTo(0, 0); }, [view]);
   useEffect(() => {
     if (view !== "projetos" || selectedProject === null) return;
@@ -55,7 +54,7 @@ export default function Home() {
   }, [view, selectedProject]);
   const open = (next: View) => {
     if (next === "projetos") { setSelectedProject(null); setProjectMinimized(false); }
-    if (next === "sobre mim") { setAboutOpen(true); setAboutTab("Me conheça"); }
+    if (next === "sobre mim") setAboutOpen(true);
     setView(next);
   };
   const project = selectedProject === null ? null : projects[selectedProject];
@@ -84,7 +83,7 @@ export default function Home() {
         </>
       ) : (
         <>
-          <header className="inner-header"><button className="inner-brand" onClick={() => open("inicio")}><PixelIcon>▰</PixelIcon> ana paula ♡</button><nav aria-label="Navegação principal">{views.map((item, index) => <button key={item} className={view === item ? "active" : ""} onClick={() => open(item)} aria-current={view === item ? "page" : undefined}>{view === "sobre mim" && <span className="about-nav-icon"><img src={`/assets/sobre-mim/${["inicio", "projetos", "sobre-mim", "experiencia", "contato"][index]}-app.png`} alt="" /></span>}{item}</button>)}</nav></header>
+          <header className="inner-header"><button className="inner-brand" onClick={() => open("inicio")}><PixelIcon>▰</PixelIcon> ana paula ♡</button><nav aria-label="Navegação principal">{views.map((item) => <button key={item} className={view === item ? "active" : ""} onClick={() => open(item)} aria-current={view === item ? "page" : undefined}>{view === "sobre mim" && <img className="about-app-icon" src={`/assets/sobre-mim/apps/${["inicio", "projetos", "sobre_mim", "experiencia", "contato"][views.indexOf(item)]}.png`} alt="" />}{view === "sobre mim" ? `${["início", "projetos", "sobre_mim", "experiência", "contato"][views.indexOf(item)]}.app` : item}</button>)}</nav></header>
           <div className="inner-content" key={view}>
             {view === "projetos" && <section className={`projects-page${project ? " has-project" : ""}`} aria-labelledby="projects-title">
               <div className="section-heading"><img className="projects-star" src="/assets/portfolio/decoracao/estrela-amarela.png" width={59} height={70} alt="" /><h2 id="projects-title">Projetos</h2></div>
@@ -108,21 +107,13 @@ export default function Home() {
                 </article> : null}
               </div>
             </section>}
-            {view === "sobre mim" && <section className="about-desktop" aria-label="Sobre mim">
-              <img className="about-character" src="/assets/sobre-mim/personagem-pixel-art.png" alt="Ana Paula em pixel art, com cabelos pretos e blusa vinho" />
-              {aboutOpen && <div className="about-window" role="dialog" aria-label="Sobre mim">
-                <button className="about-close" type="button" aria-label="Fechar janela Sobre mim" onClick={() => setAboutOpen(false)} />
-                <div className="about-sidebar" role="tablist" aria-label="Seções sobre mim">
-                  {(["Me conheça", "Formação", "Interesses"] as const).map((item) => <button key={item} type="button" role="tab" aria-selected={aboutTab === item} onClick={() => setAboutTab(item)}><img src={`/assets/sobre-mim/icone-${item === "Me conheça" ? "perfil" : item === "Formação" ? "formacao" : "interesses"}.png`} alt="" />{item}</button>)}
-                  <img className="about-flowers" src="/assets/sobre-mim/florzinhas.png" alt="" />
-                </div>
-                <div className="about-window-body" role="tabpanel">
-                  {aboutTab === "Me conheça" && <><h2>Oi, eu sou a Ana Paula ♡</h2><p>Sou estudante de Engenharia de Software e atuo como estagiária em desenvolvimento.</p><p>Meu interesse por IA surgiu dos filmes e jogos, e hoje estou explorando projetos com Machine Learning e LLMs.</p></>}
-                  {aboutTab === "Formação" && <><h2>Formação</h2><p><strong>Engenharia de Software</strong><br />Universidade Ceuma · 2026–2029</p></>}
-                  {aboutTab === "Interesses" && <><h2>Interesses</h2><p>Engenharia de IA · Agentes inteligentes · Visão computacional · Machine Learning</p></>}
-                </div>
-              </div>}
-              <img className="about-dock" src="/assets/sobre-mim/dock-completo.png" alt="" />
+            {view === "sobre mim" && <section className="about-desktop" aria-label="Área de trabalho Sobre mim">
+              <div className="about-apps" aria-hidden="true" />
+              {aboutOpen && <article className="about-window" aria-label="sobre_mim.app">
+                <header className="about-window-titlebar"><div className="window-buttons"><button type="button" className="window-close" aria-label="Fechar janela" onClick={() => setAboutOpen(false)} /><span className="window-minimize" /><span className="window-expand" /></div><span>sobre_mim.app</span></header>
+                <div className="about-window-content"><img className="hello-sticker" src="/assets/sobre-mim/decoracoes/balao_ola.png" alt="Oi, eu sou a Ana Paula" /><div className="about-copy"><p>Sou estudante de Engenharia de Software e atuo como estagiária em desenvolvimento.</p><p>Meu interesse por IA surgiu dos filmes e jogos, e hoje estou explorando projetos com Machine Learning e LLMs.</p></div><div className="about-photo"><img src="/assets/sobre-mim/decoracoes/polaroid_foto.png" alt="Fotografia de Ana Paula" /></div><img className="cherries" src="/assets/sobre-mim/decoracoes/cerejas.png" alt="" /><img className="about-star" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" /><img className="about-shine shine-one" src="/assets/sobre-mim/decoracoes/brilho_dourado_1.png" alt="" /><img className="about-shine shine-two" src="/assets/sobre-mim/decoracoes/brilho_dourado_2.png" alt="" /><span className="question-orb" aria-hidden="true" /><img className="question-sticker" src="/assets/sobre-mim/decoracoes/balao_pergunta.png" alt="So.. what are we?" /></div>
+              </article>}
+              <img className="desktop-dock" src="/assets/sobre-mim/dock/dock_completo.png" alt="Dock com Finder, pasta, Terminal, configurações e lixeira" />
             </section>}
             {view === "experiência" && <section className="experience-page" aria-labelledby="experience-title"><div className="section-heading"><span className="heading-spark">✦</span><div><h2 id="experience-title">Experiência</h2><p>Minha trajetória profissional e acadêmica até aqui.</p></div></div><div className="timeline"><article className="timeline-card"><PixelIcon>▣</PixelIcon><div><h3>Software Engineer Intern</h3><p>Instituto Evereste</p><small>Estágio iniciado em junho de 2026. Responsabilidades e tecnologias específicas ainda não informadas.</small></div><span className="date">Jun 2026 – Atual</span></article><article className="timeline-card"><PixelIcon>▤</PixelIcon><div><h3>Engenharia de Software</h3><p>Universidade Ceuma</p><small>Formação acadêmica em andamento.</small></div><span className="date">Em andamento</span></article></div></section>}
             {view === "contato" && <section className="contact-page" aria-labelledby="contact-title"><div className="section-heading"><img className="contact-star" src="/assets/portfolio/decoracao/estrela-amarela.png" width={40} height={44} alt="" /><div><h2 id="contact-title">Contato</h2><p>Vamos conversar? Você pode me encontrar por aqui:</p></div></div><div className="contact-envelope" aria-hidden="true" /><nav className="contact-links" aria-label="Links de contato"><a href="https://github.com/anaoliveiravv" target="_blank" rel="noopener noreferrer"><PixelIcon>◉</PixelIcon><span>GitHub</span><span className="contact-arrow" aria-hidden="true">→</span></a><a href="https://www.linkedin.com/in/anaoliveiravv/" target="_blank" rel="noopener noreferrer"><PixelIcon>in</PixelIcon><span>LinkedIn</span><span className="contact-arrow" aria-hidden="true">→</span></a><a href="mailto:anaolv.me@gmail.com"><PixelIcon>✉</PixelIcon><span>E-mail</span><span className="contact-arrow" aria-hidden="true">→</span></a></nav></section>}
