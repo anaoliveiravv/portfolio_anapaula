@@ -505,3 +505,45 @@ main.is-projects .inner-content{width:90%;margin:38px auto 0;padding:0;transform
   .is-projects .project-detail-columns p{font-size:12px}
   .is-projects .project-action{min-width:170px;font-size:14px}
 }
+
+/* The supplied desktop assets form the Sobre mim wallpaper and window. */
+main.is-inner.is-about{width:100%;height:100svh;min-height:0;margin:0;border:0;border-radius:0;box-shadow:none;overflow:hidden;background:#fff1e8 url('/assets/sobre-mim/fundo-creme-base.png') center/cover no-repeat}
+main.is-about .inner-header{position:relative;z-index:10;width:100%;max-width:none;margin:0;padding:18px 3.5%;transform:none}
+main.is-about .inner-header nav{flex-wrap:nowrap}
+main.is-about .inner-header nav button{min-width:clamp(102px,10vw,145px);display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 9px;font-size:clamp(11px,.9vw,15px)}
+.about-nav-icon{position:relative;width:30px;height:29px;flex:none;overflow:hidden}
+.about-nav-icon img{position:absolute;top:0;left:50%;width:auto;height:35px;max-width:none;transform:translateX(-50%);image-rendering:pixelated}
+main.is-about .inner-content{position:absolute;inset:0;z-index:1;width:100%;height:100%;margin:0;padding:0;display:block;transform:none}
+.about-desktop{position:relative;width:100%;height:100%}
+.about-character{position:absolute;bottom:0;left:0;width:min(52vw,863px);height:auto;max-width:none;clip-path:polygon(22% 0,78% 0,78% 70%,100% 100%,0 100%,18% 60%);image-rendering:pixelated}
+.about-window{position:absolute;top:21%;left:41%;width:min(57vw,950px);aspect-ratio:950/497;background:url('/assets/sobre-mim/janela-sobre-mim.png') center/100% 100% no-repeat;filter:drop-shadow(5px 10px 10px #6b416033);animation:about-open .28s ease-out both}
+.about-close{position:absolute;z-index:3;top:2.8%;left:3%;width:5%;height:10%;padding:0;border:0;border-radius:50%;background:transparent}
+.about-sidebar{position:absolute;top:15%;bottom:4%;left:3%;width:24%;display:flex;flex-direction:column;gap:1%;padding:5% 1.5%;background:linear-gradient(140deg,#f5eaf8,#efdbf2)}
+.about-sidebar button{min-height:19%;display:flex;align-items:center;gap:7%;padding:3%;border:0;border-radius:20px;background:transparent;color:#521c67;font-size:clamp(10px,1.1vw,19px);font-weight:700;text-align:left;white-space:nowrap}
+.about-sidebar button[aria-selected="true"]{background:#e8bbf7}
+.about-sidebar button img{width:24%;height:auto;max-height:52px;object-fit:contain;image-rendering:pixelated}
+.about-flowers{width:42%;height:auto;margin:auto 0 0 7%;image-rendering:pixelated}
+.about-window-body{position:absolute;top:15%;right:3%;bottom:4%;left:29%;padding:5% 3.5%;background:#fff3ec;color:#49145e}
+.about-window-body h2{width:max-content;max-width:100%;margin:0 0 5%;border-bottom:4px solid #f5b0d4;font-size:clamp(18px,2.2vw,36px);line-height:1.25}
+.about-window-body p{max-width:55ch;margin:0 0 5%;font-size:clamp(12px,1.13vw,19px);font-weight:650;line-height:1.5}
+.about-dock{position:absolute;z-index:2;bottom:2%;left:50%;width:min(29vw,485px);height:auto;transform:translateX(-50%);image-rendering:pixelated}
+@keyframes about-open{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@media(max-width:900px){
+  main.is-inner.is-about{height:auto;min-height:100svh;overflow:visible}
+  main.is-about .inner-header{display:block;padding:12px 4%}
+  main.is-about .inner-header nav{width:100%;margin-top:10px;flex-wrap:wrap}
+  main.is-about .inner-header nav button{min-width:0;flex:1 1 28%;font-size:11px}
+  main.is-about .inner-content{position:relative;height:auto;min-height:720px}
+  .about-desktop{min-height:720px}
+  .about-character{top:0;bottom:auto;left:0;width:min(72vw,440px)}
+  .about-window{top:270px;left:3%;width:94%;min-height:440px;aspect-ratio:auto;background-size:100% 100%}
+  .about-sidebar{top:14%;right:3%;bottom:auto;left:3%;width:auto;height:70px;flex-direction:row;align-items:center;padding:5px;gap:4px}
+  .about-sidebar button{min-height:50px;flex:1;gap:4px;justify-content:center;padding:4px;font-size:11px;white-space:normal}
+  .about-sidebar button img{width:24px}
+  .about-flowers{display:none}
+  .about-window-body{top:31%;left:4%;right:4%;bottom:5%;padding:16px}
+  .about-window-body h2{font-size:clamp(18px,5vw,28px)}
+  .about-window-body p{font-size:clamp(12px,3.4vw,16px)}
+  .about-dock{bottom:8px;width:min(75vw,360px)}
+}
+@media(prefers-reduced-motion:reduce){.about-window{animation:none}}
