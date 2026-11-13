@@ -1,16 +1,39 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 type View = "inicio" | "projetos" | "sobre mim" | "experiência" | "contato";
 const views: View[] = ["inicio", "projetos", "sobre mim", "experiência", "contato"];
-const projects = [
-  { title: "SP Spaces", description: "Plataforma de gerenciamento de espaços e reservas.", tags: ["Java", "Spring Boot", "PostgreSQL"], development: "Desenvolvido em equipe, com back-end em Java e Spring Boot, modelagem de dados e integração com o front-end.", overview: "Permite o cadastro de espaços, gestão de reservas, avaliações e fotos, com foco em uma experiência simples e intuitiva.", art: "landscape-art", cover: "/assets/portfolio/projetos/sp-spaces-capa.png", screens: ["/assets/portfolio/projetos/sp-spaces-tela-1.png", "/assets/portfolio/projetos/sp-spaces-tela-2.png", "/assets/portfolio/projetos/sp-spaces-tela-3.png"] },
-  { title: "Classificador de Flores", description: "Experimento de classificação de flores com Python e aprendizado de máquina.", tags: ["Python", "Pandas", "Scikit-learn"], development: "Experimento de classificação usando Python e bibliotecas de análise de dados.", overview: "Explora o uso de aprendizado de máquina para classificar flores a partir de suas características.", art: "flower-art" },
-  { title: "Data Garden", description: "Visualização de dados em um ambiente interativo e lúdico.", tags: ["D3.js", "TypeScript"], development: "Visualizações interativas desenvolvidas com D3.js e TypeScript.", overview: "Apresenta dados em uma interface visual e interativa.", art: "mosaic-art" },
-  { title: "Projetos Acadêmicos", description: "Trabalhos desenvolvidos durante a graduação.", tags: ["Python", "Java", "TypeScript"], development: "Projetos e exercícios desenvolvidos ao longo da graduação em Engenharia de Software.", overview: "Uma coleção de trabalhos acadêmicos e experimentos de desenvolvimento.", art: null },
-  { title: "Outros Estudos", description: "Experimentos e estudos independentes.", tags: ["Estudos", "Experimentos"], development: "Explorações independentes de ferramentas e ideias de desenvolvimento.", overview: "Pequenos estudos reunidos em uma pasta de experimentos.", art: null },
+type Project = { title: string; description: string; tags: string[]; development: string; overview: string; art: string | null; images: string[]; url?: string };
+// shortcut: these crops temporarily fill projects without their own screenshots; replace them when their assets exist.
+const baseImages = ["/assets/portfolio/projetos/classificador-tela-1.png", "/assets/portfolio/projetos/classificador-tela-2.png", "/assets/portfolio/projetos/classificador-tela-3.png"];
+const projects: Project[] = [
+  { title: "SP Spaces", description: "Plataforma de gerenciamento de espaços e reservas.", tags: ["Java", "Spring Boot", "PostgreSQL"], development: "Desenvolvido em equipe, com back-end em Java e Spring Boot, modelagem de dados e integração com o front-end.", overview: "Permite o cadastro de espaços, gestão de reservas, avaliações e fotos, com foco em uma experiência simples e intuitiva.", art: "landscape-art", images: ["/assets/portfolio/projetos/sp-spaces-capa.png", "/assets/portfolio/projetos/sp-spaces-tela-1.png", "/assets/portfolio/projetos/sp-spaces-tela-2.png", "/assets/portfolio/projetos/sp-spaces-tela-3.png"] },
+  { title: "Classificador de Flores", description: "Experimento de classificação de flores com Python e aprendizado de máquina.", tags: ["Python", "Pandas", "Scikit-learn"], development: "Experimento de classificação usando Python e bibliotecas de análise de dados.", overview: "Explora o uso de aprendizado de máquina para classificar flores a partir de suas características.", art: "flower-art", images: baseImages },
+  { title: "Data Garden", description: "Visualização de dados em um ambiente interativo e lúdico.", tags: ["D3.js", "TypeScript"], development: "Visualizações interativas desenvolvidas com D3.js e TypeScript.", overview: "Apresenta dados em uma interface visual e interativa.", art: "mosaic-art", images: baseImages },
+  { title: "Projetos Acadêmicos", description: "Trabalhos desenvolvidos durante a graduação.", tags: ["Python", "Java", "TypeScript"], development: "Projetos e exercícios desenvolvidos ao longo da graduação em Engenharia de Software.", overview: "Uma coleção de trabalhos acadêmicos e experimentos de desenvolvimento.", art: null, images: baseImages },
+  { title: "Outros Estudos", description: "Experimentos e estudos independentes.", tags: ["Estudos", "Experimentos"], development: "Explorações independentes de ferramentas e ideias de desenvolvimento.", overview: "Pequenos estudos reunidos em uma pasta de experimentos.", art: null, images: baseImages },
 ];
+
+function ProjectImageCarousel({ title, images }: { title: string; images: string[] }) {
+  const [index, setIndex] = useState(0);
+  if (!images.length) return null;
+  return <div className="project-image-carousel" aria-label={`Imagens de ${title}`}>
+    <div className="project-carousel-frame"><img key={index} src={images[index]} alt={`${title}, imagem ${index + 1} de ${images.length}`} /></div>
+    {images.length > 1 && <>
+      <button className="project-carousel-arrow previous" type="button" aria-label="Imagem anterior" onClick={() => setIndex((index - 1 + images.length) % images.length)}>‹</button>
+      <button className="project-carousel-arrow next" type="button" aria-label="Próxima imagem" onClick={() => setIndex((index + 1) % images.length)}>›</button>
+      <div className="project-carousel-indicators" aria-label="Selecionar imagem">{images.map((src, slide) => <button key={src} type="button" aria-label={`Imagem ${slide + 1}`} aria-current={slide === index ? "true" : undefined} onClick={() => setIndex(slide)} />)}</div>
+    </>}
+  </div>;
+}
+
+function ProjectAction({ project, onUnavailable }: { project: Project; onUnavailable: () => void }) {
+  const className = "project-action";
+  return project.url
+    ? <a className={className} href={project.url} target="_blank" rel="noopener noreferrer"><span aria-hidden="true">↗</span> Ver projeto</a>
+    : <button className={className} type="button" onClick={onUnavailable}><span aria-hidden="true">↗</span> Ver projeto</button>;
+}
 
 function PixelIcon({ children }: { children: React.ReactNode }) {
   return <span className="pixel-icon" aria-hidden="true">{children}</span>;
@@ -20,7 +43,14 @@ export default function Home() {
   const [view, setView] = useState<View>("inicio");
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [projectMinimized, setProjectMinimized] = useState(false);
+  const [linkNotice, setLinkNotice] = useState(false);
   useLayoutEffect(() => { window.scrollTo(0, 0); }, [view]);
+  useEffect(() => {
+    if (view !== "projetos" || selectedProject === null) return;
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") { setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); } };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [view, selectedProject]);
   const open = (next: View) => {
     if (next === "projetos") { setSelectedProject(null); setProjectMinimized(false); }
     setView(next);
@@ -57,21 +87,21 @@ export default function Home() {
               <div className="section-heading"><img className="projects-star" src="/assets/portfolio/decoracao/estrela-amarela.png" width={59} height={70} alt="" /><h2 id="projects-title">Projetos</h2></div>
               <div className="project-workspace">
                 <div className="project-folder-grid" aria-label="Pastas de projetos">
-                  {projects.map((item, index) => <button className={`project-folder-button${selectedProject === index ? " active" : ""}`} key={item.title} onClick={() => { setSelectedProject(index); setProjectMinimized(false); }} aria-pressed={selectedProject === index}><img className="project-folder-paper" src="/assets/portfolio/decoracao/pagina-pasta.png" width={970} height={652} alt="" /><img className="project-folder-art" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={1082} height={832} alt="" /><span className="project-folder-label">{item.title}</span></button>)}
-                  <div className="project-folder-add" aria-hidden="true">+</div>
+                  {projects.map((item, index) => project && selectedProject !== index ? null : <button className={`project-folder-button${selectedProject === index ? " active" : ""}`} key={item.title} onClick={() => { setSelectedProject(index); setProjectMinimized(false); setLinkNotice(false); }} aria-pressed={selectedProject === index}><img className="project-folder-paper" src="/assets/portfolio/decoracao/pagina-pasta.png" width={970} height={652} alt="" /><img className="project-folder-art" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={1082} height={832} alt="" /><span className="project-folder-label">{item.title}</span></button>)}
+                  {project ? null : <div className="project-folder-add" aria-hidden="true">+</div>}
                 </div>
-                {project ? <article key={selectedProject} className={`project-detail-window${projectMinimized ? " minimized" : ""}`} aria-labelledby="project-detail-title">
-                  <div className="project-window-back" aria-hidden="true" />
-                  <header className="project-window-bar"><img className="project-window-folder" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={44} height={34} alt="" /><h3 id="project-detail-title">{project.title}</h3><div className="project-window-controls"><button type="button" aria-label="Minimizar janela" onClick={() => setProjectMinimized(!projectMinimized)}>−</button><button type="button" aria-label="Fechar janela" onClick={() => { setSelectedProject(null); setProjectMinimized(false); }}>×</button></div></header>
+                {project ? <article key={selectedProject} className={`project-detail-window${projectMinimized ? " minimized" : ""}`} aria-label={project.title}>
+                  <header className="project-window-bar"><h3 id="project-detail-title">{project.title}</h3><div className="project-window-controls"><button type="button" aria-label="Minimizar janela" onClick={() => setProjectMinimized(!projectMinimized)}>−</button><button type="button" aria-label="Fechar janela" onClick={() => { setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); }}>×</button></div></header>
                   {projectMinimized ? null : <div className="project-window-content">
-                    <div className={`project-overview${project.art ? "" : " no-preview"}`}>
-                      {project.cover ? <div className="project-media"><img className="project-cover" src={project.cover} width={335} height={169} alt={`Prévia de ${project.title}`} /><div className="project-screens">{project.screens.map((src, index) => <img className="project-screen-shot" key={src} src={src} width={index === 0 ? 101 : index === 1 ? 105 : 107} height={73} alt={`Tela ${index + 1} de ${project.title}`} />)}</div></div> : project.art ? <div className="project-media"><div className={`project-preview ${project.art}`} role="img" aria-label={`Prévia de ${project.title}`} /></div> : null}
+                    <div className={`project-overview${project.images.length || project.art ? "" : " no-preview"}`}>
+                      {project.images.length ? <div className="project-media"><ProjectImageCarousel title={project.title} images={project.images} /></div> : project.art ? <div className="project-media"><div className={`project-preview ${project.art}`} role="img" aria-label={`Prévia de ${project.title}`} /></div> : null}
                       <div className="project-summary"><h4>{project.title}</h4><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
                     </div>
                     <div className="project-detail-divider" />
-                    <div className="project-detail-columns"><section><span className="development-icon" aria-hidden="true">▤</span><div><h4>Como foi desenvolvido</h4><p>{project.development}</p></div></section><section><span className="overview-icon" aria-hidden="true">▱</span><div><h4>Sobre o projeto</h4><p>{project.overview}</p></div></section></div>
-                    <div className="project-action-row"><button className="project-action" type="button" disabled title="Link do projeto ainda não cadastrado"><span aria-hidden="true">↗</span> Ver projeto</button></div>
+                    <div className="project-detail-columns"><section><span aria-hidden="true">›</span><div><h4>Como foi desenvolvido</h4><p>{project.development}</p></div></section><section><span aria-hidden="true">›</span><div><h4>Sobre o projeto</h4><p>{project.overview}</p></div></section></div>
+                    <div className="project-action-row"><ProjectAction project={project} onUnavailable={() => setLinkNotice(true)} /></div>
                   </div>}
+                  {linkNotice && !projectMinimized && <p className="project-link-notice" role="status">Link do projeto será adicionado em breve.</p>}
                 </article> : null}
               </div>
             </section>}
