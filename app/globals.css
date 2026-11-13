@@ -276,6 +276,80 @@ main.is-projects .inner-content{width:min(1416px,89%);margin:44px auto 100px;tra
 @media(max-width:1000px){main.is-projects .inner-content{width:92%;margin:22px auto 90px}.project-workspace{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px}.project-folder-art,.project-folder-add{height:92px}.project-folder-label{font-size:12px}.project-window-content{padding:16px}.project-overview{gap:14px}.project-preview{height:145px}.project-summary h4{font-size:20px}.project-detail-columns{gap:14px}}
 @media(max-width:700px){main.is-projects .inner-header{width:auto;padding:16px 4% 0;transform:none}main.is-projects .inner-content{width:calc(100% - 28px);margin:22px auto 80px;padding-bottom:70px}.is-projects .projects-page>.section-heading{gap:12px;margin-bottom:12px}.is-projects .projects-page>.section-heading h2{font-size:39px}.project-workspace{grid-template-columns:1fr;gap:24px}.project-folder-grid{gap:12px 8px;transform:none}.project-folder-button,.project-folder-add{width:100%}.project-folder-art,.project-folder-add{height:74px}.project-folder-label{min-height:38px;padding:5px 4px;font-size:10px}.project-folder-add{font-size:34px}.project-detail-window{min-height:0;margin-top:0}.project-window-bar{min-height:48px;padding:6px 12px}.project-window-bar h3{font-size:15px}.project-window-folder{width:27px;height:19px}.project-window-content{padding:13px}.project-overview{grid-template-columns:1fr;gap:14px}.project-preview{height:150px}.project-screens{gap:7px;margin-top:8px}.project-screen-shot{height:60px}.project-summary h4{font-size:20px}.project-summary .tags{margin-top:10px}.project-detail-divider{margin:14px 0}.project-detail-columns{grid-template-columns:1fr;gap:15px}.project-action{min-width:170px}}
 
+/* Sobre mim and Contato follow the supplied two-page composition. */
+@media(min-width:651px){
+  .is-inner.is-about,.is-inner.is-contact{height:calc(100svh - 20px);min-height:0;display:flex;flex-direction:column;overflow:hidden}
+  .is-about .inner-content,.is-contact .inner-content{width:min(1120px,90%);flex:1;min-height:0;display:grid;align-items:center;margin:0 auto;padding:0}
+  .is-about .about-page{width:min(1020px,100%);max-width:1020px;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,70px);align-items:center;margin:0 auto;transform:none}
+  .is-about .portrait-card{width:min(100%,330px);height:auto;aspect-ratio:.92;margin:auto;padding:0;transform:none}
+  .is-about .portrait-placeholder{width:100%;height:100%;background-size:400% auto;background-position:0 0;background-repeat:no-repeat;clip-path:none}
+  .is-about .about-text{width:100%;max-width:610px;transform:none}
+  .is-about .about-page>.about-text>.section-heading{gap:15px;align-items:flex-start}
+  .is-about .about-star,.is-contact .contact-star{width:36px;height:40px;flex:none;object-fit:contain;margin-top:3px}
+  .is-about .section-heading h2,.is-contact .section-heading h2{font-size:clamp(42px,4vw,54px)}
+  .is-about .section-heading p{max-width:520px;margin-top:12px;font-size:15px;line-height:1.5}
+  .is-about .about-block{gap:18px;margin:15px 0 0;padding:14px 4px;border-bottom:0}
+  .is-about .about-block:nth-of-type(2){margin-top:15px}
+  .is-about .about-block h3{margin-bottom:7px;font-size:17px}
+  .is-about .about-block strong{font-size:18px}
+  .is-about .about-block p{margin-top:5px;font-size:14px}
+  .is-about .about-block:last-child{border-top:1px solid #c9aec3;padding-top:18px}
+  .is-about .interests{gap:7px;margin-top:10px}
+  .is-about .interests span{padding:6px 10px;border:1px solid #c49dbc;background:#f5dbeb;font-size:11px}
+  .is-contact .inner-content{width:100%}
+  .is-contact .contact-page{width:min(900px,88%);max-width:none;grid-template-columns:minmax(220px,.8fr) minmax(320px,1.2fr);grid-template-rows:auto auto;align-content:center;align-items:center;column-gap:clamp(34px,5vw,70px);row-gap:26px;margin:0 auto;transform:none}
+  .is-contact .contact-page>.section-heading{grid-column:1/-1;gap:15px;margin:0;align-items:flex-start}
+  .is-contact .section-heading p{max-width:430px;margin-top:10px;font-size:15px}
+  .is-contact .contact-envelope{grid-column:1;grid-row:2;position:static;width:220px;height:215px;margin:auto;background-size:1090px 726px;background-position:-852px -36px;transform:none}
+  .is-contact .contact-links{grid-column:2;grid-row:2;display:grid;width:100%;gap:12px;margin:0}
+  .is-contact .contact-links>a{min-height:54px;display:flex;align-items:center;gap:13px;padding:7px 16px;border:1.5px solid #9b8299;border-radius:14px;background:#fff4edec;box-shadow:0 4px 0 #7b6f8042;color:#573753;font-size:16px;font-weight:700;text-decoration:none;transition:background-color .16s ease,transform .16s ease,border-color .16s ease;cursor:inherit}
+  .is-contact .contact-links>a:hover{border-color:#8c5d80;background:#f9e3ee;transform:translateX(3px)}
+  .is-contact .contact-links>a:focus-visible{outline:3px solid #b35188;outline-offset:3px}
+  .is-contact .contact-links .pixel-icon{width:34px;height:34px;flex:none;transform:none}
+  .is-contact .contact-arrow{margin-left:auto;font-size:22px;font-weight:400;line-height:1}
+}
+@media(max-width:1000px) and (min-width:651px){
+  .is-about .inner-content{width:92%}
+  .is-about .about-page{width:100%;max-width:none;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:28px}
+  .is-about .portrait-card{width:min(100%,260px)}
+  .is-about .about-block{gap:12px;margin-top:9px;padding:9px 2px}
+  .is-about .about-block:nth-of-type(2){margin-top:9px}
+  .is-about .about-block h3{font-size:15px}
+  .is-about .about-block strong{font-size:16px}
+  .is-about .about-block p{font-size:12px}
+  .is-about .interests span{font-size:10px}
+  .is-contact .contact-page{width:min(720px,90%);grid-template-columns:minmax(190px,.8fr) minmax(280px,1.2fr);gap:20px 36px}
+  .is-contact .contact-envelope{width:185px;height:180px;background-size:916px 610px;background-position:-716px -30px}
+  .is-contact .contact-links>a{min-height:48px;font-size:14px}
+}
+@media(max-width:650px){
+  .is-inner.is-about,.is-inner.is-contact{height:auto;min-height:100svh;overflow:hidden}
+  .is-about .inner-content,.is-contact .inner-content{width:90%;margin:25px auto 60px;padding:0;display:block}
+  .is-about .about-page{grid-template-columns:1fr;gap:28px;width:100%;margin:0 auto;transform:none}
+  .is-about .portrait-card{width:min(260px,80vw);height:auto;aspect-ratio:.92;transform:none}
+  .is-about .portrait-placeholder{background-size:400% auto;clip-path:none}
+  .is-about .about-text{max-width:none;transform:none}
+  .is-about .about-page>.about-text>.section-heading{gap:10px}
+  .is-about .about-star,.is-contact .contact-star{width:27px;height:32px}
+  .is-about .about-block{gap:10px;margin-top:13px;padding:13px 0}
+  .is-about .about-block:nth-of-type(2){margin-top:10px}
+  .is-about .about-block h3{font-size:15px}
+  .is-about .about-block strong{font-size:16px}
+  .is-about .about-block p{font-size:12px}
+  .is-about .interests span{font-size:10px}
+  .is-contact .contact-page{width:100%;grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:24px;margin:0 auto}
+  .is-contact .contact-page>.section-heading{grid-column:1;gap:10px;margin:0}
+  .is-contact .contact-envelope{grid-column:1;grid-row:2;width:180px;height:176px;margin:0 auto;background-size:890px 593px;background-position:-696px -29px}
+  .is-contact .contact-links{grid-column:1;grid-row:3;gap:10px;margin:0}
+  .is-contact .contact-links>a{min-height:48px;display:flex;align-items:center;padding:6px 13px;gap:12px;border:1.5px solid #9b8299;border-radius:14px;background:#fff4edec;box-shadow:0 4px 0 #7b6f8042;color:#573753;font-size:14px;font-weight:700;text-decoration:none;cursor:inherit}
+  .is-contact .contact-links>a:hover{background:#f9e3ee}
+  .is-contact .contact-links>a:focus-visible{outline:3px solid #b35188;outline-offset:3px}
+  .is-contact .contact-links .pixel-icon{width:30px;height:30px}
+  .is-contact .contact-arrow{margin-left:auto;font-size:21px;line-height:1}
+}
+.is-contact .contact-links>a:nth-child(2) .pixel-icon{background-position:-42px -145px}
+.is-contact .contact-links>a:nth-child(3) .pixel-icon{background-position:-80px -145px}
+
 /* Project page uses the supplied reference assets. */
 main.is-projects{width:calc(100% - 20px);height:calc(100svh - 20px);min-height:0;margin:10px;overflow:visible;border-radius:28px}
 main.is-projects .inner-header{width:91%;max-width:1450px;margin:0 auto;padding:26px 4% 10px;transform:scale(1.05);transform-origin:top center}
