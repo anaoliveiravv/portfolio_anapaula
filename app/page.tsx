@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
-type View = "inicio" | "projetos" | "sobre mim" | "experiência" | "contato";
-const views: View[] = ["inicio", "projetos", "sobre mim", "experiência", "contato"];
+type View = "projetos" | "sobre mim" | "experiência" | "contato";
+const views: View[] = ["projetos", "sobre mim", "experiência", "contato"];
 type Project = { title: string; description: string; tags: string[]; development: string; overview: string; art: string | null; images: string[]; url?: string };
 // shortcut: these crops temporarily fill projects without their own screenshots; replace them when their assets exist.
 const baseImages = ["/assets/portfolio/projetos/classificador-tela-1.png", "/assets/portfolio/projetos/classificador-tela-2.png", "/assets/portfolio/projetos/classificador-tela-3.png"];
@@ -35,91 +35,132 @@ function ProjectAction({ project, onUnavailable }: { project: Project; onUnavail
     : <button className={className} type="button" onClick={onUnavailable}><span aria-hidden="true">↗</span> Ver projeto</button>;
 }
 
-function PixelIcon({ children }: { children: React.ReactNode }) {
-  return <span className="pixel-icon" aria-hidden="true">{children}</span>;
+function PixelIcon() {
+  return <span className="pixel-icon" aria-hidden="true" />;
+}
+
+function LoginScreen({ onEnter }: { onEnter: () => void }) {
+  const usernameTarget = "anapaula";
+  const passwordTarget = "portfolio";
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setUsername(usernameTarget);
+      setPassword(passwordTarget);
+      return;
+    }
+    let index = 0;
+    const timer = window.setInterval(() => {
+      index += 1;
+      setUsername(usernameTarget.slice(0, Math.min(index, usernameTarget.length)));
+      setPassword(passwordTarget.slice(0, Math.max(0, index - usernameTarget.length)));
+      if (index >= usernameTarget.length + passwordTarget.length) {
+        window.clearInterval(timer);
+      }
+    }, 35);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return <main className="login-screen">
+    <form className="login-window" onSubmit={event => { event.preventDefault(); onEnter(); }}>
+      <header className="login-titlebar"><h1>Login</h1><span aria-hidden="true">×</span></header>
+      <div className="login-content">
+        <span className="login-avatar" aria-hidden="true"><i /><b /></span>
+        <label className="login-field"><span className="login-user-icon" aria-hidden="true"><i /><b /></span><span className="sr-only">Nome de usuário</span><input aria-label="Nome de usuário" type="password" autoComplete="off" value={username} readOnly /></label>
+        <label className="login-field"><span className="login-lock-icon" aria-hidden="true" /><span className="sr-only">Senha</span><input aria-label="Senha" type="password" autoComplete="new-password" value={password} readOnly /><span className="login-eye" aria-hidden="true"><i /></span></label>
+        <button className="login-enter" type="submit">Enter</button>
+      </div>
+    </form>
+  </main>;
+}
+
+type WindowPosition = { x: number; y: number };
+
+function DesktopWindow({ app, depth, onClose, onFocus, onDragStart, position, children }: { app: View; depth: number; onClose: () => void; onFocus: () => void; onDragStart: (app: View, event: React.PointerEvent<HTMLElement>) => void; position?: WindowPosition; children: ReactNode }) {
+  const slug = ["projetos", "sobre_mim", "experiencia", "contato"][views.indexOf(app)];
+  return <article onPointerDown={onFocus} className={`desktop-app-window desktop-app-window-${app === "projetos" ? "projects" : slug}${app === "sobre mim" ? " about-window" : ""}${depth === 0 ? " is-first-window" : ""}${position ? " is-dragged" : ""}`} style={{ zIndex: depth + 1, ...(position ? { left: position.x, top: position.y, transform: "none" } : {}) }} aria-label={slug + ".app"}>
+    <header className="about-window-titlebar" onPointerDown={event => { if ((event.target as HTMLElement).closest("button")) return; event.currentTarget.setPointerCapture(event.pointerId); onDragStart(app, event); }}><div className="window-buttons"><button type="button" className="window-close" aria-label={`Fechar ${slug}.app`} onClick={onClose} /><span className="window-minimize" /><span className="window-expand" /></div><span>{slug}.app</span></header>
+    {children}
+  </article>;
 }
 
 export default function Home() {
-  const [view, setView] = useState<View>("inicio");
+  const [windowStack, setWindowStack] = useState<View[]>([]);
+  const [desktopOpen, setDesktopOpen] = useState(false);
+  const [poweringOff, setPoweringOff] = useState(false);
+  const [loginCycle, setLoginCycle] = useState(0);
+  const view = windowStack.at(-1);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [projectMinimized, setProjectMinimized] = useState(false);
   const [linkNotice, setLinkNotice] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(true);
-  useLayoutEffect(() => { window.scrollTo(0, 0); }, [view]);
+  const [windowPositions, setWindowPositions] = useState<Partial<Record<View, WindowPosition>>>({});
+  const activeDrag = useRef<{ app: View; pointerId: number; startX: number; startY: number; left: number; top: number; width: number; height: number; stageWidth: number; stageHeight: number } | null>(null);
   useEffect(() => {
-    if (view !== "projetos" || selectedProject === null) return;
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") { setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); } };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (selectedProject !== null && view === "projetos") { setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); }
+      else if (view) setWindowStack(stack => stack.slice(0, -1));
+    };
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [view, selectedProject]);
   const open = (next: View) => {
-    if (next === "projetos") { setSelectedProject(null); setProjectMinimized(false); }
-    if (next === "sobre mim") setAboutOpen(true);
-    setView(next);
+    setWindowStack(stack => [...stack.filter(item => item !== next), next]);
+  };
+  const focus = (app: View) => setWindowStack(stack => stack.at(-1) === app ? stack : [...stack.filter(item => item !== app), app]);
+  const close = (app: View) => {
+    setWindowStack(stack => stack.filter(item => item !== app));
+    if (app === "projetos") { setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); }
+  };
+  const startWindowDrag = (app: View, event: React.PointerEvent<HTMLElement>) => {
+    if (window.matchMedia("(max-width:700px)").matches) return;
+    const stage = event.currentTarget.closest(".desktop-stage");
+    const panel = event.currentTarget.parentElement;
+    if (!stage || !panel) return;
+    const stageRect = stage.getBoundingClientRect();
+    const panelRect = panel.getBoundingClientRect();
+    const position = windowPositions[app] ?? { x: panelRect.left - stageRect.left, y: panelRect.top - stageRect.top };
+    activeDrag.current = { app, pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, left: position.x, top: position.y, width: panelRect.width, height: panelRect.height, stageWidth: stageRect.width, stageHeight: stageRect.height };
+    setWindowPositions(current => current[app] ? current : { ...current, [app]: position });
+  };
+  const moveWindow = (event: React.PointerEvent<HTMLElement>) => {
+    const drag = activeDrag.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const x = Math.max(0, Math.min(drag.stageWidth - drag.width, drag.left + event.clientX - drag.startX));
+    const y = Math.max(140, Math.min(Math.max(140, drag.stageHeight - drag.height), drag.top + event.clientY - drag.startY));
+    setWindowPositions(current => ({ ...current, [drag.app]: { x, y } }));
+  };
+  const endWindowDrag = (event: React.PointerEvent<HTMLElement>) => {
+    if (activeDrag.current?.pointerId === event.pointerId) activeDrag.current = null;
   };
   const project = selectedProject === null ? null : projects[selectedProject];
+  const enterDesktop = () => { setWindowStack([]); setDesktopOpen(true); setPoweringOff(false); };
+  const powerOff = () => {
+    setPoweringOff(true);
+    window.setTimeout(() => {
+      setWindowStack([]); setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); setWindowPositions({});
+      setDesktopOpen(false); setLoginCycle(cycle => cycle + 1); setPoweringOff(false);
+    }, 240);
+  };
 
+  if (!desktopOpen) return <LoginScreen key={loginCycle} onEnter={enterDesktop} />;
   return (
-    <main className={`app-shell ${view === "inicio" ? "is-home" : "is-inner"}${view === "contato" ? " is-contact" : ""}${view === "experiência" ? " is-experience" : ""}${view === "sobre mim" ? " is-about" : ""}${view === "projetos" ? " is-projects" : ""}`}>
-      {view === "inicio" ? (
-        <>
-          <header className="home-header"><span className="home-file"><PixelIcon>▰</PixelIcon> portfolio.exe</span><span>v1.0.0</span></header>
-          <section className="home-layout" aria-labelledby="home-title">
-            <div className="folder-stack">
-              <div className="folder-behind folder-behind-one" /><div className="folder-behind folder-behind-two" />
-              <div className="hero-folder">
-                <span className="folder-tab" /><span className="folder-label">ARQUIVO PESSOAL / 2026</span>
-                <span className="hero-spark spark-a" aria-hidden="true">✦</span><span className="hero-spark spark-b" aria-hidden="true">✦</span>
-                <p className="hero-eyebrow">ENGENHARIA DE SOFTWARE ✳ IA</p>
-                <h1 id="home-title">ANA<br />PAULA</h1>
-                <p className="hero-role">Desenvolvedora Back-end <span>✦</span> Entusiasta de IA</p>
-                <span className="sticker sticker-bunny" aria-hidden="true">♡</span><span className="sticker sticker-cherry" aria-hidden="true">✿</span>
-              </div>
-            </div>
-            <nav className="game-menu" aria-label="Menu do portfólio">
-              {views.slice(1).map((item, index) => <button className={index === 0 ? "selected" : ""} key={item} onClick={() => open(item)}><span className="menu-glyph" aria-hidden="true">{["▷", "♙", "▣", "✉"][index]}</span>{item}<span className="menu-arrow" aria-hidden="true">↗</span></button>)}
-            </nav>
-          </section>
-        </>
-      ) : (
-        <>
-          <header className="inner-header"><button className="inner-brand" onClick={() => open("inicio")}><PixelIcon>▰</PixelIcon> ana paula ♡</button><nav aria-label="Navegação principal">{views.map((item) => <button key={item} className={view === item ? "active" : ""} onClick={() => open(item)} aria-current={view === item ? "page" : undefined}>{view === "sobre mim" && <img className="about-app-icon" src={`/assets/sobre-mim/apps/${["inicio", "projetos", "sobre_mim", "experiencia", "contato"][views.indexOf(item)]}.png`} alt="" />}{view === "sobre mim" ? `${["início", "projetos", "sobre_mim", "experiência", "contato"][views.indexOf(item)]}.app` : item}</button>)}</nav></header>
-          <div className="inner-content" key={view}>
-            {view === "projetos" && <section className={`projects-page${project ? " has-project" : ""}`} aria-labelledby="projects-title">
-              <div className="section-heading"><img className="projects-star" src="/assets/portfolio/decoracao/estrela-amarela.png" width={59} height={70} alt="" /><h2 id="projects-title">Projetos</h2></div>
-              <div className="project-workspace">
-                <div className="project-folder-grid" aria-label="Pastas de projetos">
-                  {projects.map((item, index) => project && selectedProject !== index ? null : <button className={`project-folder-button${selectedProject === index ? " active" : ""}`} key={item.title} onClick={() => { setSelectedProject(index); setProjectMinimized(false); setLinkNotice(false); }} aria-pressed={selectedProject === index}><img className="project-folder-paper" src="/assets/portfolio/decoracao/pagina-pasta.png" width={970} height={652} alt="" /><img className="project-folder-art" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={1082} height={832} alt="" /><span className="project-folder-label">{item.title}</span></button>)}
-                  {project ? null : <div className="project-folder-add" aria-hidden="true">+</div>}
-                </div>
-                {project ? <article key={selectedProject} className={`project-detail-window${projectMinimized ? " minimized" : ""}`} aria-label={project.title}>
-                  <header className="project-window-bar"><h3 id="project-detail-title">{project.title}</h3><div className="project-window-controls"><button type="button" aria-label="Minimizar janela" onClick={() => setProjectMinimized(!projectMinimized)}>−</button><button type="button" aria-label="Fechar janela" onClick={() => { setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); }}>×</button></div></header>
-                  {projectMinimized ? null : <div className="project-window-content">
-                    <div className={`project-overview${project.images.length || project.art ? "" : " no-preview"}`}>
-                      {project.images.length ? <div className="project-media"><ProjectImageCarousel title={project.title} images={project.images} /></div> : project.art ? <div className="project-media"><div className={`project-preview ${project.art}`} role="img" aria-label={`Prévia de ${project.title}`} /></div> : null}
-                      <div className="project-summary"><h4>{project.title}</h4><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
-                    </div>
-                    <div className="project-detail-divider" />
-                    <div className="project-detail-columns"><section><span aria-hidden="true">›</span><div><h4>Como foi desenvolvido</h4><p>{project.development}</p></div></section><section><span aria-hidden="true">›</span><div><h4>Sobre o projeto</h4><p>{project.overview}</p></div></section></div>
-                    <div className="project-action-row"><ProjectAction project={project} onUnavailable={() => setLinkNotice(true)} /></div>
-                  </div>}
-                  {linkNotice && !projectMinimized && <p className="project-link-notice" role="status">Link do projeto será adicionado em breve.</p>}
-                </article> : null}
-              </div>
-            </section>}
-            {view === "sobre mim" && <section className="about-desktop" aria-label="Área de trabalho Sobre mim">
-              <div className="about-apps" aria-hidden="true" />
-              {aboutOpen && <article className="about-window" aria-label="sobre_mim.app">
-                <header className="about-window-titlebar"><div className="window-buttons"><button type="button" className="window-close" aria-label="Fechar janela" onClick={() => setAboutOpen(false)} /><span className="window-minimize" /><span className="window-expand" /></div><span>sobre_mim.app</span></header>
-                <div className="about-window-content"><img className="hello-sticker" src="/assets/sobre-mim/decoracoes/balao_ola.png" alt="Oi, eu sou a Ana Paula" /><div className="about-copy"><p>Sou estudante de Engenharia de Software e atuo como estagiária em desenvolvimento.</p><p>Meu interesse por IA surgiu dos filmes e jogos, e hoje estou explorando projetos com Machine Learning e LLMs.</p></div><div className="about-photo"><img src="/assets/sobre-mim/decoracoes/polaroid_foto.png" alt="Fotografia de Ana Paula" /></div><img className="cherries" src="/assets/sobre-mim/decoracoes/cerejas.png" alt="" /><img className="about-star" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" /><img className="about-shine shine-one" src="/assets/sobre-mim/decoracoes/brilho_dourado_1.png" alt="" /><img className="about-shine shine-two" src="/assets/sobre-mim/decoracoes/brilho_dourado_2.png" alt="" /><span className="question-orb" aria-hidden="true" /><img className="question-sticker" src="/assets/sobre-mim/decoracoes/balao_pergunta.png" alt="So.. what are we?" /></div>
-              </article>}
-              <img className="desktop-dock" src="/assets/sobre-mim/dock/dock_completo.png" alt="Dock com Finder, pasta, Terminal, configurações e lixeira" />
-            </section>}
-            {view === "experiência" && <section className="experience-page" aria-labelledby="experience-title"><div className="section-heading"><span className="heading-spark">✦</span><div><h2 id="experience-title">Experiência</h2><p>Minha trajetória profissional e acadêmica até aqui.</p></div></div><div className="timeline"><article className="timeline-card"><PixelIcon>▣</PixelIcon><div><h3>Software Engineer Intern</h3><p>Instituto Evereste</p><small>Estágio iniciado em junho de 2026. Responsabilidades e tecnologias específicas ainda não informadas.</small></div><span className="date">Jun 2026 – Atual</span></article><article className="timeline-card"><PixelIcon>▤</PixelIcon><div><h3>Engenharia de Software</h3><p>Universidade Ceuma</p><small>Formação acadêmica em andamento.</small></div><span className="date">Em andamento</span></article></div></section>}
-            {view === "contato" && <section className="contact-page" aria-labelledby="contact-title"><div className="section-heading"><img className="contact-star" src="/assets/portfolio/decoracao/estrela-amarela.png" width={40} height={44} alt="" /><div><h2 id="contact-title">Contato</h2><p>Vamos conversar? Você pode me encontrar por aqui:</p></div></div><div className="contact-envelope" aria-hidden="true" /><nav className="contact-links" aria-label="Links de contato"><a href="https://github.com/anaoliveiravv" target="_blank" rel="noopener noreferrer"><PixelIcon>◉</PixelIcon><span>GitHub</span><span className="contact-arrow" aria-hidden="true">→</span></a><a href="https://www.linkedin.com/in/anaoliveiravv/" target="_blank" rel="noopener noreferrer"><PixelIcon>in</PixelIcon><span>LinkedIn</span><span className="contact-arrow" aria-hidden="true">→</span></a><a href="mailto:anaolv.me@gmail.com"><PixelIcon>✉</PixelIcon><span>E-mail</span><span className="contact-arrow" aria-hidden="true">→</span></a></nav></section>}
-          </div>
-        </>
-      )}
+    <main className={`app-shell desktop-shell${poweringOff ? " powering-off" : ""}`}>
+      <button className="power-button" type="button" aria-label="Voltar à tela de login" onClick={powerOff}>⏻</button>
+      <header className="desktop-header"><nav aria-label="Aplicativos do portfólio">{views.map((item, index) => <button key={item} className={view === item ? "active" : ""} onClick={() => open(item)} aria-current={view === item ? "page" : undefined}><img className="about-app-icon" src={`/assets/portfolio/apps/${["projetos", "sobre_mim", "experiencia", "contato"][index]}.png`} alt="" /><span>{["projetos", "sobre_mim", "experiência", "contato"][index]}</span></button>)}</nav></header>
+      <section className="desktop-stage" aria-label="Área de trabalho" onPointerMove={moveWindow} onPointerUp={endWindowDrag} onPointerCancel={endWindowDrag}>
+        {windowStack.map((app, depth) => <DesktopWindow key={app} app={app} depth={depth} onFocus={() => focus(app)} onClose={() => close(app)} onDragStart={startWindowDrag} position={windowPositions[app]}>
+          {app === "projetos" && <div className="app-window-content projects-app-content"><section className={`projects-page${project ? " has-project" : ""}`} aria-label="Projetos"><div className="project-workspace"><div className="project-folder-grid" aria-label="Pastas de projetos">{projects.map((item, index) => <button className={`project-folder-button${selectedProject === index ? " active" : ""}`} key={item.title} onClick={() => { setSelectedProject(index); setProjectMinimized(false); setLinkNotice(false); }} aria-pressed={selectedProject === index}><img className="project-folder-paper" src="/assets/portfolio/decoracao/pagina-pasta.png" width={970} height={652} alt="" /><img className="project-folder-art" src="/assets/portfolio/pastas/pasta-amarela-fornecida.png" width={1082} height={832} alt="" /><span className="project-folder-label">{item.title}</span></button>)}<div className="project-folder-add" aria-hidden="true">+</div></div>
+            {project && <article key={selectedProject} className={`project-detail-window${projectMinimized ? " minimized" : ""}`} aria-label={project.title}><header className="project-window-bar"><h3 id="project-detail-title">{project.title}</h3><div className="project-window-controls"><button type="button" aria-label="Minimizar janela do projeto" onClick={event => { event.stopPropagation(); setProjectMinimized(!projectMinimized); }}>−</button><button type="button" aria-label="Fechar janela do projeto" onClick={event => { event.stopPropagation(); setSelectedProject(null); setProjectMinimized(false); setLinkNotice(false); }}>×</button></div></header>{projectMinimized ? null : <div className="project-window-content"><div className={`project-overview${project.images.length || project.art ? "" : " no-preview"}`}>{project.images.length ? <div className="project-media"><ProjectImageCarousel title={project.title} images={project.images} /></div> : project.art ? <div className="project-media"><div className={`project-preview ${project.art}`} role="img" aria-label={`Prévia de ${project.title}`} /></div> : null}<div className="project-summary"><h4>{project.title}</h4><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></div><div className="project-detail-divider" /><div className="project-detail-columns"><section><span aria-hidden="true">›</span><div><h4>Como foi desenvolvido</h4><p>{project.development}</p></div></section><section><span aria-hidden="true">›</span><div><h4>Sobre o projeto</h4><p>{project.overview}</p></div></section></div><div className="project-action-row"><ProjectAction project={project} onUnavailable={() => setLinkNotice(true)} /></div></div>}{linkNotice && !projectMinimized && <p className="project-link-notice" role="status">Link do projeto será adicionado em breve.</p>}</article>}
+          </div></section></div>}
+          {app === "sobre mim" && <div className="about-window-content"><img className="hello-sticker" src="/assets/sobre-mim/decoracoes/balao_ola.png" alt="Oi, eu sou a Ana Paula" /><div className="about-copy"><p>Sou estudante de Engenharia de Software e atuo como estagiária em desenvolvimento.</p><p>Meu interesse por IA surgiu dos filmes e jogos, e hoje estou explorando projetos com Machine Learning e LLMs.</p></div><div className="about-photo"><img src="/assets/sobre-mim/decoracoes/polaroid_foto.png" alt="Fotografia de Ana Paula" /></div><img className="cherries" src="/assets/sobre-mim/decoracoes/cerejas.png" alt="" /><img className="about-star" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" /><img className="about-shine shine-one" src="/assets/sobre-mim/decoracoes/brilho_dourado_1.png" alt="" /><img className="about-shine shine-two" src="/assets/sobre-mim/decoracoes/brilho_dourado_2.png" alt="" /><span className="question-orb" aria-hidden="true" /><img className="question-sticker" src="/assets/sobre-mim/decoracoes/balao_pergunta.png" alt="So.. what are we?" /></div>}
+          {app === "experiência" && <div className="app-window-content experience-app-content"><section className="experience-page" aria-label="Experiência"><img className="experience-decoration experience-mascot" src="/assets/portfolio/experiencia/claudinho-note-cafe.png" alt="Claudinho com notebook e café" /><img className="experience-decoration experience-pendant" src="/assets/portfolio/experiencia/pingente-coracao.png" alt="" /><img className="experience-decoration experience-ribbon-top" src="/assets/portfolio/experiencia/fita-xadrez-superior.png" alt="" /><img className="experience-decoration experience-ribbon-bottom" src="/assets/portfolio/experiencia/fita-xadrez-inferior.png" alt="" /><img className="experience-decoration experience-starburst" src="/assets/portfolio/experiencia/estrela-rosa.png" alt="" /><img className="experience-decoration experience-sparkles" src="/assets/portfolio/experiencia/estrelas-amarelas.png" alt="" /><img className="experience-decoration experience-rays" src="/assets/portfolio/experiencia/brilhos-rosa.png" alt="" /><div className="experience-cards"><article className="experience-card"><img className="experience-card-icon" src="/assets/portfolio/experiencia/icone-maleta-card.png" alt="" /><div className="experience-card-divider" /><div className="experience-card-copy"><h3>Estágio em Desenvolvimento de Software</h3><p className="experience-organization">Instituto Evereste</p><p>Atuo no desenvolvimento back-end de uma plataforma portuária com Java, Spring Boot, APIs REST e PostgreSQL. Tenho aprendido na prática a estruturar serviços, integrar dados e colaborar em equipe.</p></div><span className="experience-period">ago/2026 – atual</span></article><article className="experience-card"><img className="experience-card-icon" src="/assets/portfolio/experiencia/icone-notebook-card.png" alt="" /><div className="experience-card-divider" /><div className="experience-card-copy"><h3>Engenharia de Software</h3><p className="experience-organization">Universidade CEUMA</p><p>Venho desenvolvendo conhecimentos em programação, engenharia de software e fundamentos de tecnologia, além de práticas de projeto e construção de sistemas.</p></div><span className="experience-period">jan/2026 – dez/2029</span></article></div></section></div>}
+          {app === "contato" && <div className="app-window-content contact-app-content"><section className="contact-page" aria-label="Contato"><div className="contact-envelope" aria-hidden="true" /><nav className="contact-links" aria-label="Links de contato"><a href="https://github.com/anaoliveiravv" target="_blank" rel="noopener noreferrer"><PixelIcon /><span>GitHub</span><span className="contact-arrow" aria-hidden="true">→</span></a><a href="https://www.linkedin.com/in/anaoliveiravv/" target="_blank" rel="noopener noreferrer"><PixelIcon /><span>LinkedIn</span><span className="contact-arrow" aria-hidden="true">→</span></a><a href="mailto:anaolv.me@gmail.com"><PixelIcon /><span>E-mail</span><span className="contact-arrow" aria-hidden="true">→</span></a></nav></section></div>}
+        </DesktopWindow>)}
+        <div className="desktop-dock" aria-hidden="true"><span><img src="/assets/portfolio/dock/finder.png" alt="" /></span><span><img src="/assets/portfolio/dock/terminal.png" alt="" /></span><span><img src="/assets/portfolio/dock/configuracoes.png" alt="" /></span><span><img src="/assets/portfolio/dock/lixeira.png" alt="" /></span></div>
+      </section>
     </main>
   );
 }
