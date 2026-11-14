@@ -671,6 +671,7 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 .desktop-stage>.desktop-app-window-contato{left:52%;top:23%}
 .desktop-stage>.desktop-app-window.is-first-window{left:50%;top:50%;transform:translate(-50%,-50%)}
 .desktop-stage>.desktop-app-window:focus-within{box-shadow:0 12px 28px #65476545}
+.desktop-stage>.desktop-app-window.is-dragged{transition:none!important}
 .desktop-app-window .about-window-titlebar{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 20px;border-bottom:1px solid #94718e;background:#fffaf7;color:#603a60;font-size:17px;font-weight:500;cursor:url('/assets/pixel-cursor.png') 12 5,grab;touch-action:none;user-select:none}
 .desktop-app-window.is-dragged .about-window-titlebar{cursor:url('/assets/pixel-cursor.png') 12 5,grabbing}
 .desktop-app-window .about-window-titlebar>span{grid-column:2}
@@ -915,4 +916,42 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
   .desktop-app-window-contato>.contact-app-content{height:auto;min-height:470px;padding:14px}
   .desktop-app-window-contato .contact-page{height:auto;grid-template-columns:1fr;grid-template-rows:auto auto;gap:18px}
   .desktop-app-window-contato .contact-envelope,.desktop-app-window-contato .contact-links{grid-row:auto}
+}
+
+/* Experience window proportions follow the shared app window shell. */
+.desktop-stage>.desktop-app-window-experiencia{left:50%;top:calc(50% + 32px);width:min(960px,76vw);height:min(570px,64vh);transform:translate(-50%,-50%)}
+.desktop-stage>.desktop-app-window-experiencia.is-first-window{left:50%;top:calc(50% + 32px);width:min(960px,76vw);height:min(570px,64vh);transform:translate(-50%,-50%)}
+.desktop-stage>.desktop-app-window-experiencia:not(.is-first-window){left:calc(50% + 22px);top:calc(50% + 44px);transform:translate(-50%,-50%)}
+.desktop-app-window-experiencia>.experience-app-content{display:block;height:calc(100% - 44px);padding:8px 22px;overflow:visible}
+.desktop-app-window-experiencia .experience-page{height:100%;padding:0;overflow:visible}
+.desktop-app-window-experiencia .experience-page::before{content:"";position:absolute;z-index:2;inset:0;border:2px solid #e6b2c5;border-radius:18px;pointer-events:none}
+.experience-mascot{top:-4%;right:8%;width:clamp(165px,14vw,200px)}
+.experience-starburst,.experience-page::after{z-index:-1}
+.experience-ribbon-top{top:-8%;right:-6%}
+.experience-ribbon-bottom{left:-5%;width:clamp(92px,9vw,120px);z-index:11}
+.experience-sparkles{top:2%;right:37%}
+.experience-rays{top:8%;right:23%}
+.experience-pendant{top:-7%;left:-92px;width:clamp(60px,6.2vw,82px)}
+.experience-cards{top:33%;left:50%;right:auto;width:min(1000px,calc(100% - 120px));height:60%;grid-template-rows:1fr 1fr;transform:translateX(-50%)}
+.experience-card{padding:8px 15px}
+.experience-card-copy p{font-size:clamp(11px,1.05vw,14px)}
+.desktop-stage>.desktop-app-window-experiencia{border-color:transparent}
+.desktop-stage:has(>.desktop-app-window-experiencia)>.desktop-dock{z-index:0}
+.desktop-stage>.desktop-app-window-experiencia::after{content:"";position:absolute;z-index:10;inset:0;border:2px solid #765a72;border-radius:22px;pointer-events:none}
+.experience-ribbon-top,.experience-ribbon-bottom{z-index:11}
+.experience-starburst{top:-10%;right:-12%;width:clamp(150px,18vw,230px);aspect-ratio:342/338;background:#f5a2c4;-webkit-mask:url('/assets/portfolio/experiencia/estrela-rosa.png') center/contain no-repeat;mask:url('/assets/portfolio/experiencia/estrela-rosa.png') center/contain no-repeat;opacity:.9}
+.experience-page::after{left:-11%;bottom:-8%;width:clamp(135px,17vw,220px);background:#f5a2c4;-webkit-mask:url('/assets/portfolio/experiencia/estrela-rosa.png') center/contain no-repeat;mask:url('/assets/portfolio/experiencia/estrela-rosa.png') center/contain no-repeat;opacity:.9}
+@media(max-width:700px){
+  .desktop-stage>.desktop-app-window-experiencia,.desktop-stage>.desktop-app-window-experiencia.is-first-window,.desktop-stage>.desktop-app-window-experiencia:not(.is-first-window){left:auto;top:auto;width:92%;height:auto;min-height:470px;transform:none}
+  .desktop-app-window-experiencia>.experience-app-content{height:auto;min-height:620px}
+  .desktop-app-window-experiencia .experience-page{height:auto;min-height:590px}
+  .experience-mascot{top:2%;right:3%;width:150px}
+  .experience-pendant{top:-4%;left:-36px;width:52px}
+  .experience-cards{position:relative;top:auto;left:auto;right:auto;width:auto;height:auto;margin:220px 4% 32px;grid-template-rows:auto;gap:12px;transform:none}
+  .experience-card{grid-template-columns:44px 1px minmax(0,1fr);gap:9px;padding:10px}
+  .experience-card-icon{width:42px;height:42px}
+  .experience-card-copy h3{font-size:14px}
+  .experience-card-copy p{font-size:12px}
+  .experience-period{grid-column:3;grid-row:2;justify-self:start;margin-top:5px}
+  .experience-ribbon-bottom{bottom:-2%;width:82px}
 }
