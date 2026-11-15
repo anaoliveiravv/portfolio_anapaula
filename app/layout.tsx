@@ -8,7 +8,7 @@ const poppins = localFont({ src: [
   { path: "./fonts/Poppins-SemiBold.ttf", weight: "600" },
   { path: "./fonts/Poppins-Bold.ttf", weight: "700" },
 ], variable: "--font-poppins" });
-const bagelFatOne = localFont({ src: "./fonts/BagelFatOne-Regular.woff2", weight: "400", variable: "--font-bagel-fat-one" });
+const loginDisplay = localFont({ src: "./fonts/Chewy-Regular.ttf", weight: "400", variable: "--font-login-display" });
 
 export const metadata: Metadata = {
   title: "Ana Paula de Oliveira — Software Engineer",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${poppins.variable} ${bagelFatOne.variable}`}>
+    <html lang="pt-BR" className={`${poppins.variable} ${loginDisplay.variable}`}>
       <body>{children}</body>
     </html>
   );

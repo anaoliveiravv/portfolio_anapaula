@@ -90,7 +90,11 @@ function LoginScreen({ onEnter }: { onEnter: () => void }) {
 
   return <main className="login-screen">
     <div className="login-composition">
-    <div className="login-brand"><img className="login-brand-star login-brand-star-left" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" /><h1>Ana's Portfolio</h1><img className="login-brand-star login-brand-star-right" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" /></div>
+    <div className="login-brand">
+      <img className="login-brand-star login-brand-star-left" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" />
+      <h1 aria-label="Ana's Portfolio"><span className="login-title-letters" aria-hidden="true"><span>A</span><span>n</span><span>a</span><span>'</span><span>s</span><span className="login-title-space" /><span>P</span><span>o</span><span>r</span><span>t</span><span>f</span><span>o</span><span>l</span><span>i</span><span>o</span></span></h1>
+      <img className="login-brand-star login-brand-star-right" src="/assets/sobre-mim/decoracoes/estrela_amarela.png" alt="" />
+    </div>
     <form className="login-window" onSubmit={event => { event.preventDefault(); onEnter(); }}>
       <header className="login-titlebar"><h1>Login</h1><span aria-hidden="true">×</span></header>
       <div className="login-content">
