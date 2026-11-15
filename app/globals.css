@@ -569,7 +569,7 @@ main.desktop-shell{position:relative;width:100%;height:100svh;min-height:0;margi
 .desktop-header{position:absolute;z-index:30;top:22px;left:0;width:100%;display:flex;justify-content:center;padding:0 5%}
 .desktop-header nav{width:min(1400px,84%);display:flex;align-items:flex-start;justify-content:space-between;gap:clamp(18px,4.1vw,68px)}
 .desktop-header nav button{position:relative;z-index:0;width:clamp(100px,10vw,160px);height:120px;padding:0 0 8px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;border:0;border-radius:20px;background:transparent;box-shadow:none;color:#4b1462;font-size:clamp(12px,1.4vw,22px);font-weight:500;text-align:center;white-space:nowrap;cursor:url('/assets/pixel-cursor-left.png') 12 1,pointer}
-.desktop-header nav button *{cursor:inherit}
+.desktop-header nav button>span,.desktop-header nav button>img{pointer-events:none;cursor:url('/assets/pixel-cursor-left.png') 12 1,pointer!important}
 .desktop-app-window .window-close{cursor:url('/assets/pixel-cursor-left.png') 12 1,pointer}
 .desktop-header nav button::after{content:"";position:absolute;z-index:-1;left:-10%;right:-10%;bottom:0;height:31px;border-radius:24px;background:transparent}
 .desktop-header nav button.active::after{background:#edc5f4}
@@ -676,9 +676,10 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 .desktop-app-window .about-window-titlebar{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 20px;border-bottom:1px solid #94718e;background:#fffaf7;color:#603a60;font-size:17px;font-weight:500;cursor:url('/assets/pixel-cursor-left.png') 12 1,grab;touch-action:none;user-select:none}
 .desktop-app-window.is-dragged .about-window-titlebar{cursor:url('/assets/pixel-cursor-left.png') 12 1,grabbing}
 .desktop-app-window .about-window-titlebar>span{grid-column:2}
-.desktop-app-window .window-buttons{position:absolute;left:18px;top:50%;display:flex;align-items:center;gap:8px;transform:translateY(-50%)}
+.desktop-app-window .window-buttons{position:absolute;left:6px;top:50%;display:flex;align-items:center;gap:8px;transform:translateY(-50%)}
 .desktop-app-window .window-buttons>span,.desktop-app-window .window-buttons button{width:14px;height:14px;min-width:14px;border:1px solid #743c55;border-radius:50%;padding:0}
-.desktop-app-window .window-close{background:#ef5a56;box-shadow:inset 0 1px 2px #fff8}
+.desktop-app-window .window-buttons button.window-close{position:relative;left:auto;top:auto;display:grid;flex:0 0 28px;place-items:center;width:28px;height:28px;min-width:28px;margin-right:-7px;transform:none;border:0;background:transparent;box-shadow:none;cursor:url('/assets/pixel-cursor-left.png') 12 1,pointer}
+.desktop-app-window .window-buttons button.window-close::before{content:"";width:14px;height:14px;border:1px solid #743c55;border-radius:50%;background:#ef5a56;box-shadow:inset 0 1px 2px #fff8}
 .desktop-app-window .window-minimize{background:#f3c644;box-shadow:inset 0 1px 2px #fff8}
 .desktop-app-window .window-expand{background:#70c95d;box-shadow:inset 0 1px 2px #fff8}
 .desktop-app-window>.app-window-content{height:calc(100% - 52px);padding:18px 25px}
