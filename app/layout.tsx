@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-poppins" });
+const poppins = localFont({ src: [
+  { path: "./fonts/Poppins-Regular.ttf", weight: "400" },
+  { path: "./fonts/Poppins-Medium.ttf", weight: "500" },
+  { path: "./fonts/Poppins-SemiBold.ttf", weight: "600" },
+  { path: "./fonts/Poppins-Bold.ttf", weight: "700" },
+], variable: "--font-poppins" });
+const bagelFatOne = localFont({ src: "./fonts/BagelFatOne-Regular.woff2", weight: "400", variable: "--font-bagel-fat-one" });
 
 export const metadata: Metadata = {
   title: "Ana Paula de Oliveira — Software Engineer",
@@ -18,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={poppins.variable}>
+    <html lang="pt-BR" className={`${poppins.variable} ${bagelFatOne.variable}`}>
       <body>{children}</body>
     </html>
   );

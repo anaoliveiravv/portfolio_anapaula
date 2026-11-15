@@ -956,6 +956,46 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
   .experience-ribbon-bottom{bottom:-2%;width:82px}
 }
 
+/* Login title and compact centered window. */
+.login-composition{width:min(900px,100%);display:grid;justify-items:center;gap:clamp(22px,4vh,38px)}
+.login-brand{position:relative;width:max-content;max-width:100%;padding:0 54px;color:#ed3478;text-align:center}
+.login-brand h1{margin:0;font-family:var(--font-bagel-fat-one),sans-serif;font-size:clamp(56px,7.4vw,100px);font-weight:400;line-height:.98;letter-spacing:0;white-space:nowrap}
+.login-brand-star{position:absolute;width:clamp(25px,3.4vw,43px);height:auto}
+.login-brand-star-left{left:-3px;bottom:0;transform:rotate(-12deg)}
+.login-brand-star-right{right:-3px;top:-17px;transform:rotate(10deg)}
+.login-window{width:min(520px,calc(100vw - 34px));min-height:0}
+.login-titlebar{height:56px;padding:0 18px}
+.login-titlebar h1{font-size:30px}
+.login-titlebar>span{font-size:40px}
+.login-content{width:calc(100% - 54px);margin:16px auto 20px;gap:12px}
+.login-avatar{width:44px;height:48px;margin-bottom:2px}
+.login-avatar i{width:24px;height:24px}
+.login-avatar b{width:44px;height:21px}
+.login-field{height:48px;padding:0 17px;border-radius:24px}
+.login-field input{font-size:19px;padding-left:43px}
+.login-user-icon{left:20px;transform:translateY(-50%) scale(.82)}
+.login-lock-icon{left:20px;transform:translateY(1px) scale(.82)}
+.login-field:has(.login-lock-icon) input{padding-left:43px}
+.login-eye{right:17px;transform:scale(.82)}
+.login-enter{width:190px;height:50px;border-radius:12px;font-size:21px}
+.experience-rays{display:none}
+@media(max-width:700px){
+  .login-composition{gap:17px}
+  .login-brand{width:100%;padding:0 26px}
+  .login-brand h1{font-size:clamp(34px,9vw,58px);white-space:normal;overflow-wrap:anywhere}
+  .login-brand-star{width:26px}
+  .login-brand-star-left{left:-2px}
+  .login-brand-star-right{right:-2px;top:-10px}
+  .login-window{width:min(440px,calc(100vw - 28px))}
+  .login-content{width:calc(100% - 34px);margin:13px auto 16px;gap:10px}
+  .login-titlebar{height:50px}
+  .login-titlebar h1{font-size:25px}
+  .login-titlebar>span{font-size:34px}
+  .login-field{height:44px}
+  .login-field input{font-size:17px}
+  .login-enter{width:160px;height:44px;font-size:19px}
+}
+
 /* Project detail edges and the retro image viewer. */
 .projects-app-content .project-detail-window{box-sizing:border-box;overflow:hidden;border:2px solid #765a72!important;border-radius:18px;background:#fffaf7!important;background-image:none!important;box-shadow:0 8px 24px #65476535}
 .projects-app-content .project-window-bar{position:relative;box-sizing:border-box;min-height:56px;align-items:center;justify-content:center;padding:0 22px;border:0;border-bottom:1px solid #94718e;border-radius:16px 16px 0 0;background:linear-gradient(180deg,#fafafa,#efeff0)}
