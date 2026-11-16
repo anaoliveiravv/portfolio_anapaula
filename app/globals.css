@@ -665,7 +665,7 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 .desktop-header .about-app-icon{width:clamp(56px,5.8vw,86px);height:clamp(56px,5.8vw,86px)}
 .power-button{position:absolute;z-index:40;top:26px;left:32px;width:43px;height:43px;border:1px solid #916982;border-radius:50%;background:#fff5f1;color:#693d64;font-size:26px;line-height:1;box-shadow:0 3px 8px #65476522;transition:transform .16s ease,background .16s ease}
 .power-button:hover{transform:scale(1.07);background:#f8d7e7}
-.desktop-stage>.desktop-app-window{left:50%;top:23%;width:min(1300px,88vw);height:min(570px,64vh);transform:translate(-50%,0);transition:left .2s ease,top .2s ease,box-shadow .2s ease;}
+.desktop-stage>.desktop-app-window{left:50%;top:23%;width:min(960px,76vw);height:min(570px,64vh);transform:translate(-50%,0);transition:left .2s ease,top .2s ease,box-shadow .2s ease;}
 .desktop-stage>.desktop-app-window-projects{left:47%;top:22%}
 .desktop-stage>.desktop-app-window-sobre_mim{left:51%;top:24%}
 .desktop-stage>.desktop-app-window-experiencia{left:49%;top:21%}
@@ -921,8 +921,8 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 }
 
 /* Experience window proportions follow the shared app window shell. */
-.desktop-stage>.desktop-app-window-experiencia{left:50%;top:calc(50% + 32px);width:min(1300px,88vw);height:min(570px,64vh);transform:translate(-50%,-50%)}
-.desktop-stage>.desktop-app-window-experiencia.is-first-window{left:50%;top:calc(50% + 32px);width:min(1300px,88vw);height:min(570px,64vh);transform:translate(-50%,-50%)}
+.desktop-stage>.desktop-app-window-experiencia{left:50%;top:calc(50% + 32px);width:min(960px,76vw);height:min(570px,64vh);transform:translate(-50%,-50%)}
+.desktop-stage>.desktop-app-window-experiencia.is-first-window{left:50%;top:calc(50% + 32px);width:min(960px,76vw);height:min(570px,64vh);transform:translate(-50%,-50%)}
 .desktop-stage>.desktop-app-window-experiencia:not(.is-first-window){left:calc(50% + 22px);top:calc(50% + 44px);transform:translate(-50%,-50%)}
 .desktop-app-window-experiencia>.experience-app-content{display:block;height:calc(100% - 44px);padding:8px 22px;overflow:visible}
 .desktop-app-window-experiencia .experience-page{height:100%;padding:0;overflow:visible}
@@ -1023,7 +1023,7 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 .projects-app-content .project-window-content{box-sizing:border-box;min-height:0;height:calc(100% - 56px);border-radius:0 0 16px 16px}
 .projects-app-content .project-carousel-arrow.previous{left:4px}
 .projects-app-content .project-carousel-arrow.next{right:4px}
-.project-carousel-open{position:relative;display:block;width:100%;height:100%;padding:0;overflow:hidden;border:0;border-radius:6px;background:transparent;cursor:inherit}
+.project-carousel-open{display:block;width:100%;height:100%;padding:0;overflow:hidden;border:0;border-radius:6px;background:transparent;cursor:inherit}
 .project-lightbox{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;padding:24px;background:#281a2c99;backdrop-filter:blur(1.5px);animation:project-viewer-in .16s ease-out both}
 .project-lightbox-window{width:min(1200px,96vw);height:min(850px,94vh);display:flex;flex-direction:column;overflow:hidden;border:7px ridge #caaebe;border-radius:11px;background:#fff8f3;box-shadow:0 12px 36px #281a2c55}
 .project-lightbox-window>header{position:relative;height:48px;flex:none;display:flex;align-items:center;justify-content:center;padding:0 155px 0 52px;border-bottom:4px double #9c7b92;background:repeating-linear-gradient(180deg,#f9eaf1 0 3px,#d7bdcf 3px 5px,#fff8f3 5px 8px);color:#4b2449;font-size:15px;font-weight:700;text-align:center}
@@ -1133,8 +1133,7 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 @media(max-width:700px){.about-copy{font-size:14px;line-height:1.42}.about-copy h2{font-size:1.15em}}
 
 /* Match the About reference without allowing the text column under the Polaroid. */
-.about-copy{left:26%;top:12%;width:36%;font-size:clamp(15px,1.25vw,20px);line-height:1.42}
-@media(min-width:701px) and (min-height:800px){.desktop-stage>.desktop-app-window,.desktop-stage>.desktop-app-window-experiencia,.desktop-stage>.desktop-app-window-experiencia.is-first-window{height:min(630px,70vh)}}
+.about-copy{left:26%;top:15%;width:36%;font-size:clamp(12px,1.05vw,16px);line-height:1.42}
 .about-copy h2{margin-bottom:10px;font-size:1.5em;line-height:1.15}
 .about-copy p{margin:0 0 4%;padding-left:12px;border-left:3px solid #d44d91}
 .about-photo{right:7%;top:9%;width:29%;height:84%}
@@ -1153,15 +1152,3 @@ main.desktop-shell.powering-off{opacity:0;filter:blur(4px)}
 .desktop-app-window-contato .contact-heart-divider::before,.desktop-app-window-contato .contact-heart-divider::after{content:"";height:1.5px;flex:1;background:#573753}
 .desktop-app-window-contato .contact-heart-divider span{width:42px;height:45px;flex:none;background:url('/assets/pixel-sprites.webp') -376px -459px/768px 512px no-repeat;image-rendering:pixelated}
 @media(max-width:700px){.desktop-app-window-contato .contact-intro{grid-column:1;grid-row:auto;gap:10px}.desktop-app-window-contato .contact-envelope{width:142px;height:140px;margin:0 auto;background-size:702px 468px;background-position:-550px -23px}.desktop-app-window-contato .contact-intro-copy{transform:translateY(-8px) scale(.9)}.desktop-app-window-contato .contact-intro h2{font-size:19px}.desktop-app-window-contato .contact-intro p{max-width:34em;font-size:14px}.desktop-app-window-contato .contact-heart-divider{width:70%;max-width:280px}.desktop-app-window-contato .contact-links>a{min-height:56px;padding:7px 12px;gap:8px;font-size:14px}.desktop-app-window-contato .contact-links>.contact-resume{padding:7px 10px;gap:6px;font-size:14px;white-space:nowrap}}
-@media(max-width:700px){
-  .desktop-stage>.desktop-app-window-sobre_mim{min-height:0}
-  .desktop-app-window-sobre_mim>.about-window-content{height:auto;min-height:0;padding:0 18px 55px;overflow:visible}
-  .desktop-app-window-sobre_mim .hello-sticker{left:3%;top:12px;width:82px}
-  .desktop-app-window-sobre_mim .about-copy{position:relative;left:auto;top:auto;width:100%;padding-top:96px;font-size:14px}
-  .desktop-app-window-sobre_mim .about-copy h2{font-size:21px}
-  .desktop-app-window-sobre_mim .about-photo{position:relative;top:auto;right:auto;width:200px;height:235px;margin:16px auto 45px}
-  .desktop-app-window-sobre_mim .cherries{top:10px;right:5%;width:48px}
-  .desktop-app-window-sobre_mim .about-star{left:6%;bottom:9%;width:52px}
-  .desktop-app-window-sobre_mim .question-orb{left:63%;bottom:2%;width:38px}
-  .desktop-app-window-sobre_mim .question-sticker{right:-2%;bottom:-2%;width:120px}
-}
