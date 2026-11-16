@@ -1,1 +1,21 @@
-{"pages":{},"app":{"/Users/ana/code/portfolio/app/layout":["static/media/ff93545fabd92265-s.p.ttf","static/media/d73b390dc2633c93-s.p.ttf","static/media/ecf729077cedfaf0-s.p.ttf","static/media/b77c440ca9b87d33-s.p.ttf","static/media/e33b242085fea3bf-s.p.ttf"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}
+{
+  "app": {
+    "[project]/app/_not-found/page": [
+      "static/media/Poppins_Regular-s.p.0iwh8bbel1vnt.ttf",
+      "static/media/Poppins_Medium-s.p.1f-m2a3sompff.ttf",
+      "static/media/Poppins_SemiBold-s.p.2y-6e_gndutbv.ttf",
+      "static/media/Poppins_Bold-s.p.2t4n93i004s1b.ttf",
+      "static/media/Chewy_Regular-s.p.457sya3g_cqfi.ttf"
+    ],
+    "[project]/app/page": [
+      "static/media/Poppins_Regular-s.p.0iwh8bbel1vnt.ttf",
+      "static/media/Poppins_Medium-s.p.1f-m2a3sompff.ttf",
+      "static/media/Poppins_SemiBold-s.p.2y-6e_gndutbv.ttf",
+      "static/media/Poppins_Bold-s.p.2t4n93i004s1b.ttf",
+      "static/media/Chewy_Regular-s.p.457sya3g_cqfi.ttf"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}
